@@ -14,3 +14,5 @@ export const MenuIcon = (p) => (<svg {...base} width={24} height={24} {...p}><pa
 export const CloseIcon = (p) => (<svg {...base} width={24} height={24} {...p}><path d="M6 6l12 12M18 6L6 18" /></svg>)
 export const AlertIcon = (p) => (<svg {...base} width={18} height={18} strokeWidth={2} {...p}><circle cx="12" cy="12" r="9" /><path d="M12 8v5M12 16v.01" /></svg>)
 export const CheckIcon = (p) => (<svg {...base} width={26} height={26} strokeWidth={2.2} {...p}><path d="M5 12l5 5 9-10" /></svg>)
+export const ChevronDownIcon = (p) => (<svg {...base} width={28} height={28} {...p}><path d="M6 9l6 6 6-6" /></svg>)
+export const ShareIcon = (p) => (<svg {...base} width={24} height={24} {...p}><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" /></svg>)

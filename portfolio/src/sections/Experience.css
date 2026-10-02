@@ -1,0 +1,18 @@
+/* ---------- 03 Experience (sections/Experience) ---------- */
+.xp { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--rule); }
+.xp-row {
+  position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap); padding: 32px 0 40px;
+}
+.xp-rule { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--ink); transform-origin: left; }
+.xp-period { grid-column: 1 / 4; padding-top: 10px; color: var(--ink-2); }
+.xp-body { grid-column: 4 / 11; display: flex; flex-direction: column; gap: 6px; }
+.xp-role { font-size: clamp(28px, 3vw, 42px); line-height: 1.05; letter-spacing: -.02em; }
+.xp-org { font-weight: 500; }
+.xp-note { color: var(--muted); margin-top: 6px; }
+
+@media (max-width: 899px) {
+  .xp-row { grid-template-columns: minmax(0, 1fr); row-gap: 10px; }
+  .xp-period, .xp-body { grid-column: 1; }
+  .xp-period { padding-top: 0; }
+}

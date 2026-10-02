@@ -3,8 +3,9 @@ import { Link, useLocation } from 'react-router-dom'
 import { profile } from '../content.js'
 import {
   HomeIcon, UserIcon, FolderIcon, BriefcaseIcon, MailIcon,
-  GitHubIcon, LinkedInIcon, MenuIcon, CloseIcon,
+  MenuIcon, CloseIcon,
 } from './Icons.jsx'
+import ThemeToggle from './ThemeToggle.jsx'
 
 const NAV = [
   { id: 'top', label: 'Home', Icon: HomeIcon },
@@ -91,14 +92,15 @@ export default function Sidebar() {
           <NavLinks />
         </div>
         <div className="rail-social">
-          <a href={profile.github} aria-label="GitHub" target="_blank" rel="noopener noreferrer" className="social-link"><GitHubIcon /></a>
-          <a href={profile.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" className="social-link"><LinkedInIcon /></a>
+          <ThemeToggle className="theme-toggle-rail" />
         </div>
       </nav>
 
       {/* Mobile top bar */}
       <header className="topbar">
         {logo}
+        <div className="topbar-actions">
+        <ThemeToggle />
         <button
           type="button"
           className="menu-btn"
@@ -109,6 +111,7 @@ export default function Sidebar() {
         >
           {open ? <CloseIcon /> : <MenuIcon />}
         </button>
+        </div>
       </header>
       <div id="mobile-menu" className={`drawer${open ? ' is-open' : ''}`} hidden={!open}>
         <nav aria-label="Mobile" className="drawer-links">

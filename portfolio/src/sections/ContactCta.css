@@ -1,0 +1,27 @@
+/* ---------- 05 Contact call-out (sections/ContactCta) ---------- */
+.cta-meta { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 12px; color: var(--ink-2); border-bottom: 1px solid var(--ink); }
+.cta-title {
+  margin-top: clamp(32px, 5vw, 64px);
+  font-size: clamp(60px, 13vw, 200px); line-height: .86; letter-spacing: -.045em;
+}
+.cta-title .rl-mask + .rl-mask { padding-left: 1.1em; }
+.cta-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap;
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.cta-lead { max-width: 40ch; font-size: 19px; color: var(--ink-2); }
+.cta-actions { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
+.magnetic { display: inline-block; }
+.cta-circle {
+  width: 152px; height: 152px; border-radius: 50%; display: grid; place-content: center; text-align: center;
+  background: var(--accent); color: var(--on-accent); text-decoration: none;
+  font-family: var(--f-display); font-style: italic; font-size: 22px; line-height: 1.1;
+  transition: background .25s;
+}
+.cta-circle:hover { background: var(--ink); color: var(--paper); }
+.cta-mail { font-size: 18px; overflow-wrap: anywhere; }
+
+@media (max-width: 599px) {
+  .cta-title .rl-mask + .rl-mask { padding-left: .4em; }
+  .cta-circle { width: 128px; height: 128px; font-size: 19px; }
+}

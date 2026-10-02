@@ -1,0 +1,66 @@
+/* ---------- Masthead (components/Masthead) ---------- */
+.masthead {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--paper); border-bottom: 1px solid var(--rule);
+}
+.mh-row { height: var(--head-h); display: flex; align-items: center; gap: 24px; }
+.mh-brand {
+  font-family: var(--f-display); font-size: 22px; letter-spacing: -.02em; line-height: 1;
+  text-decoration: none; color: var(--ink); white-space: nowrap;
+}
+.mh-issue { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mh-nav { display: flex; gap: 28px; }
+.mh-link {
+  position: relative; display: inline-flex; align-items: baseline; gap: 6px;
+  font-size: 15px; font-weight: 500; color: var(--ink); text-decoration: none; padding: 8px 0;
+}
+.mh-num { font-family: var(--f-mono); font-size: 10px; color: var(--muted); }
+.mh-link::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 4px; height: 1px; background: var(--accent);
+  transform: scaleX(0); transform-origin: right; transition: transform .45s var(--ease);
+}
+.mh-link:hover::after, .mh-link.is-active::after { transform: scaleX(1); transform-origin: left; }
+.mh-link.is-active .mh-num { color: var(--accent); }
+.mh-actions { display: flex; align-items: center; gap: 12px; }
+.mh-menu-btn {
+  display: none; min-height: 40px; padding: 0 14px; border: 1px solid var(--ink); border-radius: 999px;
+  background: transparent; font: 500 12px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; cursor: pointer;
+}
+.mh-progress {
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: var(--accent); transform-origin: left;
+}
+
+/* Theme switch: a small ink pill, knob slides across */
+.theme-toggle {
+  position: relative; width: 44px; height: 24px; border-radius: 999px; padding: 0; flex-shrink: 0;
+  border: 1px solid var(--ink); background: transparent; cursor: pointer;
+}
+.theme-toggle-knob {
+  position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--ink); transition: transform .35s var(--ease), background .35s;
+}
+.theme-toggle.is-dark .theme-toggle-knob { transform: translateX(20px); background: var(--accent); }
+
+@media (max-width: 1099px) { .mh-issue { visibility: hidden; } }
+@media (max-width: 799px) {
+  .mh-nav { display: none; }
+  .mh-menu-btn { display: inline-flex; align-items: center; }
+  .mh-issue { display: none; }
+  .mh-row { justify-content: space-between; }
+}
+
+/* Mobile menu: full-screen sheet under the masthead */
+.menu {
+  position: fixed; inset: 0; z-index: 45; background: var(--paper);
+  padding: calc(var(--head-h) + 32px) var(--gutter) 32px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.menu-links { display: flex; flex-direction: column; }
+.menu-item { display: block; overflow: hidden; border-bottom: 1px solid var(--rule); }
+.menu-item .mh-link { font-family: var(--f-display); font-size: clamp(40px, 12vw, 64px); font-weight: 400; letter-spacing: -.03em; padding: 10px 0; gap: 12px; }
+.menu-item .mh-num { font-size: 12px; }
+.menu-item .mh-link::after { display: none; }
+.menu-item .mh-link.is-active { color: var(--accent); font-style: italic; }
+.menu-foot { display: flex; gap: 24px; flex-wrap: wrap; }
+.menu-foot a { color: var(--ink); text-decoration: none; }

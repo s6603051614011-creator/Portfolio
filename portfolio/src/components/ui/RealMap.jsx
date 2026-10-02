@@ -31,7 +31,13 @@ function useColorScheme() {
     const mq = window.matchMedia?.('(prefers-color-scheme: dark)')
     const onChange = () => setScheme(get())
     mq?.addEventListener('change', onChange)
-    return () => mq?.removeEventListener('change', onChange)
+    // Also follow the site's theme toggle (data-theme on <html>)
+    const mo = new MutationObserver(onChange)
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    return () => {
+      mq?.removeEventListener('change', onChange)
+      mo.disconnect()
+    }
   }, [])
   return scheme
 }

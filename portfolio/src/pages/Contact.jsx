@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import ContactForm from '../components/ContactForm.jsx'
-import AnimatedLetters from '../components/AnimatedLetters.jsx'
+import { FadeUp, RevealLines } from '../components/Reveal.jsx'
+import Todo from '../components/Todo.jsx'
 import { LocationMap } from '../components/ui/ExpandMap.jsx'
-import { profile } from '../content.js'
+import { issue, profile } from '../content.js'
+import './Contact.css'
 
 export default function Contact() {
   useEffect(() => {
@@ -11,31 +13,48 @@ export default function Contact() {
   }, [])
 
   const rows = [
-    { label: 'Email', node: <a href={`mailto:${profile.email}`} className="link-strong">{profile.email}</a> },
-    { label: 'LinkedIn', node: <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="ink">{profile.linkedin.replace('https://www.', '')}</a> },
-    { label: 'GitHub', node: <a href={profile.github} target="_blank" rel="noopener noreferrer" className="ink">{profile.github.replace('https://', '')}</a> },
+    { label: 'Email', href: `mailto:${profile.email}`, text: profile.email },
+    { label: 'LinkedIn', href: profile.linkedin, text: profile.linkedin.replace('https://www.', ''), external: true },
+    { label: 'GitHub', href: profile.github, text: profile.github.replace('https://', ''), external: true },
   ]
 
   return (
     <div className="container contact-page">
-      <div className="contact-info">
-        <span className="hero-meta"><span>~/portfolio $ ./contact.sh</span></span>
-        <h1 className="h1 h1-contact">
-          <AnimatedLetters text="Let’s talk security" />
-          <span className="accent">.</span>
-        </h1>
-        <p className="lead">Open to conversations about security roles, projects and collaborations. Email is the fastest way to reach me.</p>
-        <ul className="contact-list">
-          {rows.map((r) => (
-            <li key={r.label}>
-              <span className="contact-label">{r.label}</span>
-              {r.node}
-            </li>
-          ))}
-        </ul>
-        <LocationMap location={profile.location} coordinates={profile.coordinates} lat={profile.lat} lng={profile.lng} label={`Based in · ${profile.timezone}`} />
+      <div className="contact-strip mono">
+        <span>Letters to the editor</span>
+        <span>{issue.title} — No. {issue.no}</span>
       </div>
-      <ContactForm />
+
+      <div className="contact-grid">
+        <div className="contact-info">
+          <RevealLines
+            as="h1" immediate delay={0.1}
+            className="contact-title display"
+            lines={['Let’s talk', <em key="s">security<span className="accent">.</span></em>]}
+          />
+          <FadeUp as="p" delay={0.3} className="contact-lead">
+            Open to conversations about security roles, projects and collaborations. Email is the fastest way to reach me.
+          </FadeUp>
+          <FadeUp as="ul" delay={0.4} className="contact-list">
+            {rows.map((r) => (
+              <li key={r.label}>
+                <span className="mono">{r.label}</span>
+                <a href={r.href} {...(r.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                  <Todo>{r.text}</Todo>
+                </a>
+              </li>
+            ))}
+          </FadeUp>
+          <LocationMap
+            location={profile.location} coordinates={profile.coordinates}
+            lat={profile.lat} lng={profile.lng} label={`Based in · ${profile.timezone}`}
+          />
+        </div>
+
+        <FadeUp delay={0.45} className="contact-form-wrap">
+          <ContactForm />
+        </FadeUp>
+      </div>
     </div>
   )
 }

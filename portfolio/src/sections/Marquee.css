@@ -1,0 +1,16 @@
+/* ---------- Skills band (sections/Marquee) ---------- */
+.marquee {
+  overflow: hidden; border-block: 1px solid var(--ink); padding-block: 18px;
+  background: var(--ink); color: var(--paper);
+}
+.marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-run { display: flex; margin: 0; padding: 0; list-style: none; }
+.marquee-run li {
+  display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap;
+  font-family: var(--f-display); font-style: italic; font-weight: 300;
+  font-size: clamp(26px, 3.2vw, 44px); line-height: 1.1; letter-spacing: -.01em;
+}
+.marquee-sep { font-style: normal; font-size: .6em; color: var(--accent); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none !important; } }

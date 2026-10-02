@@ -1,0 +1,139 @@
+/* ---------- Contact page (pages/Contact) ---------- */
+.contact-page { padding-bottom: clamp(72px, 9vw, 128px); }
+.contact-strip { display: flex; justify-content: space-between; gap: 16px; padding: 22px 0 12px; border-bottom: 1px solid var(--ink); color: var(--ink-2); }
+.contact-grid {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); row-gap: 56px;
+  margin-top: clamp(32px, 5vw, 64px); align-items: start;
+}
+.contact-info { grid-column: 1 / 7; display: flex; flex-direction: column; gap: 32px; }
+.contact-title { font-size: clamp(56px, 8.4vw, 128px); line-height: .88; letter-spacing: -.045em; }
+.contact-title .rl-mask + .rl-mask { padding-left: .6em; }
+.contact-lead { font-size: 19px; color: var(--ink-2); max-width: 42ch; }
+.contact-list { list-style: none; margin: 0; padding: 0; max-width: 560px; }
+.contact-list li {
+  display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; align-items: baseline;
+  padding: 16px 0; border-top: 1px solid var(--rule); font-size: 17px;
+}
+.contact-list li:last-child { border-bottom: 1px solid var(--rule); }
+.contact-list a { color: var(--ink); overflow-wrap: anywhere; font-weight: 500; text-decoration: none; }
+.contact-list a:hover { color: var(--accent); }
+.contact-form-wrap { grid-column: 8 / 13; }
+@media (max-width: 999px) {
+  .contact-info, .contact-form-wrap { grid-column: 1 / -1; }
+}
+
+/* ---------- Form (components/ContactForm) ---------- */
+.form-card { display: flex; flex-direction: column; gap: 24px; padding-top: 20px; border-top: 1px solid var(--ink); }
+.form-card .h4 { font-family: var(--f-display); font-weight: 400; font-size: 34px; line-height: 1.05; letter-spacing: -.02em; }
+.form-head { display: flex; flex-direction: column; gap: 6px; }
+.topics { margin: 0; padding: 0; border: 0; }
+.topics legend { font-size: 14px; font-weight: 500; padding: 0 0 10px; }
+.topic-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.topic { position: relative; }
+.topic input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.topic span {
+  min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center;
+  border-radius: 999px; border: 1px solid var(--rule); font-size: 14px; font-weight: 500;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.topic input:hover + span { border-color: var(--ink); }
+.topic input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.topic input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; }
+.field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 599px) { .field-row { grid-template-columns: 1fr; } }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font: 500 12px/1.5 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+/* Fields are a rule to write on, not boxes */
+.field input, .field textarea {
+  width: 100%; min-height: 48px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--rule); border-radius: 0;
+  background: transparent; color: var(--ink); font: 18px/1.5 var(--f-body); transition: border-color .2s;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: .7; }
+.field textarea { resize: vertical; min-height: 140px; }
+.field input:focus, .field textarea:focus { outline: none; border-bottom: 2px solid var(--accent); margin-bottom: -1px; }
+.field [aria-invalid="true"] { border-bottom: 2px solid var(--danger); }
+.field-error { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--danger); margin-top: 4px; }
+.field-error svg { flex-shrink: 0; }
+.form-alert {
+  display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px;
+  background: var(--danger-bg); border-left: 3px solid var(--danger); color: var(--danger-ink);
+}
+.form-alert svg { flex-shrink: 0; margin-top: 3px; }
+.form-alert div { display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.5; }
+.form-alert a { color: var(--danger-ink); font-weight: 600; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.fineprint { font-size: 13px; line-height: 1.5; color: var(--muted); }
+.spinner { width: 18px; height: 18px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.form-success { align-items: flex-start; gap: 14px; padding-block: 40px; }
+.form-success .body { color: var(--ink-2); }
+.success-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--success-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; }
+
+/* ---------- Location map (ui/ExpandMap + ui/RealMap) ---------- */
+.lmap { position: relative; display: inline-block; align-self: flex-start; perspective: 1000px; max-width: 100%; padding-bottom: 24px; }
+.lmap-card {
+  position: relative; max-width: 100%; overflow: hidden; isolation: isolate;
+  border-radius: 4px; background: var(--paper-2); border: 1px solid var(--rule); color: var(--ink);
+}
+.lmap-card.is-expanded { border-color: var(--ink); }
+.lmap-grid {
+  position: absolute; inset: 0; opacity: .5; pointer-events: none;
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.lmap-hit { position: absolute; inset: 0; z-index: 3; width: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; }
+.lmap-hit:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+
+.lmap-real, .lmap-leaflet { position: absolute; inset: 0; }
+.lmap-leaflet { background: var(--paper-2); font-family: var(--f-body); }
+.lmap-loading, .lmap-failed {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: var(--paper-2); color: var(--muted); font-size: 13px; font-family: var(--f-mono);
+}
+.lmap-failed { z-index: 500; }
+.lmap-marker { background: none; border: 0; filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--accent) 55%, transparent)); }
+.lmap-marker .pin-body, .pin-body { fill: var(--accent); }
+.lmap-marker .pin-dot, .pin-dot { fill: var(--paper); }
+.lmap .leaflet-control-zoom { border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; margin: 12px 0 0 12px; }
+.lmap .leaflet-control-zoom a { width: 32px; height: 32px; line-height: 30px; background: var(--paper); color: var(--ink); border-color: var(--rule); }
+.lmap .leaflet-control-zoom a:hover { background: var(--paper-2); }
+.lmap .leaflet-control-attribution { font-size: 9px; background: color-mix(in srgb, var(--paper) 80%, transparent); color: var(--muted); }
+.lmap .leaflet-control-attribution a { color: var(--muted); }
+
+/* Overlay sits above Leaflet panes (z 400–700), below its controls (z 1000) so attribution stays visible */
+.lmap-content {
+  position: absolute; inset: 0; z-index: 950; pointer-events: none;
+  display: flex; flex-direction: column; justify-content: space-between; padding: 16px 18px;
+}
+.is-expanded .lmap-content { padding-bottom: 22px; }
+.is-expanded .lmap-bottom {
+  margin: 0 -18px -22px; padding: 28px 18px 22px;
+  background: linear-gradient(to top, var(--paper) 35%, transparent);
+}
+.lmap-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.is-expanded .lmap-top { justify-content: flex-end; }
+.lmap-icon { color: var(--accent); }
+.lmap-badge {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px;
+  background: var(--paper); font: 500 11px/1.4 var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2);
+}
+.lmap-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.lmap-close {
+  pointer-events: auto; width: 44px; height: 44px; margin: -6px -8px 0 0; border-radius: 4px;
+  border: 1px solid var(--rule); background: var(--paper); color: var(--ink);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.lmap-close:hover { color: var(--accent); }
+.lmap-bottom { display: flex; flex-direction: column; gap: 4px; }
+.lmap-title { display: block; font-family: var(--f-display); font-size: 22px; line-height: 1.1; }
+.lmap-coords { display: block; overflow: hidden; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.lmap-coords a { pointer-events: auto; font-family: var(--f-body); font-weight: 600; color: var(--accent); }
+.lmap-line { display: block; height: 1px; margin-top: 4px; transform-origin: left; background: var(--accent); }
+.lmap-hint { position: absolute; bottom: 0; left: 50%; font-size: 12px; color: var(--muted); white-space: nowrap; }
+@media (hover: none) { .lmap-hint { display: none; } }
+
+/* ---------- 404 (pages/NotFound) ---------- */
+.notfound { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 28px; padding-block: 64px; }
+.notfound-no { font-size: clamp(120px, 26vw, 360px); line-height: .8; letter-spacing: -.05em; }
+.notfound-no em { color: var(--accent); }
+.notfound p { font-size: 19px; color: var(--ink-2); max-width: 40ch; }
