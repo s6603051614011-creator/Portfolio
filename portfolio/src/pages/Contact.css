@@ -86,6 +86,9 @@
 
 .lmap-real, .lmap-leaflet { position: absolute; inset: 0; }
 .lmap-leaflet { background: var(--paper-2); font-family: var(--f-body); }
+/* OSM's default colours are loud; knock them back to match the paper, and flip them for dark mode */
+.lmap-real.is-light .leaflet-tile-pane { filter: grayscale(.55) sepia(.28) contrast(.95) brightness(1.02); }
+.lmap-real.is-dark .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) grayscale(.6) brightness(.82) contrast(.9); }
 .lmap-loading, .lmap-failed {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   background: var(--paper-2); color: var(--muted); font-size: 13px; font-family: var(--f-mono);

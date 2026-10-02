@@ -1,16 +1,13 @@
-// Real, interactive map (Leaflet + CARTO basemap tiles built on OpenStreetMap data).
+// Real, interactive map (Leaflet + standard OpenStreetMap tiles — free, no API key).
+// The tiles are toned to the paper theme (and inverted for dark mode) with a CSS filter.
 // Loaded lazily — only downloaded when the visitor expands the map.
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
-const TILES = {
-  light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-  dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-}
-const ATTRIBUTION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+const TILES = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
 // Custom pin (avoids Leaflet's default marker-image path problems in bundlers)
 const pinIcon = L.divIcon({
@@ -47,7 +44,7 @@ export default function RealMap({ lat, lng, zoom = 12, label }) {
   const [status, setStatus] = useState('loading') // loading | ok | failed
 
   return (
-    <div className="lmap-real">
+    <div className={`lmap-real is-${scheme}`}>
       <MapContainer
         center={[lat, lng]}
         zoom={zoom}
@@ -59,10 +56,9 @@ export default function RealMap({ lat, lng, zoom = 12, label }) {
         aria-label={`Map of ${label}`}
       >
         <TileLayer
-          key={scheme}
-          url={TILES[scheme]}
+          url={TILES}
           attribution={ATTRIBUTION}
-          subdomains="abcd"
+          maxZoom={19}
           eventHandlers={{
             tileload: () => setStatus('ok'),
             tileerror: () => setStatus((s) => (s === 'ok' ? s : 'failed')),

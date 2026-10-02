@@ -92,7 +92,8 @@ function ProjectIndex() {
     mx.set(e.clientX - r.left)
     my.set(e.clientY - r.top)
   }
-  const current = hover === null ? null : projects[hover]
+  const hovered = hover === null ? null : projects[hover]
+  const current = hovered && (hovered.image || hovered.link) ? hovered : null
 
   return (
     <div className="index" ref={ref} onMouseMove={onMove} onMouseLeave={() => setHover(null)}>
@@ -101,19 +102,24 @@ function ProjectIndex() {
         <Scramble text={`${String(projects.length).padStart(2, '0')} entries`} delay={0.15} />
       </div>
       <ol className="index-list">
-        {projects.map((p, i) => (
-          <FadeUp as="li" key={p.title} delay={i * 0.08}>
-            <a href={p.link.href} className="index-row" onMouseEnter={() => setHover(i)} {...external(p.link.href)}>
-              <span className="index-no mono">{String(i + 2).padStart(2, '0')}</span>
-              <span className="index-main">
-                <span className="index-title display"><Todo>{p.title}</Todo></span>
-                <span className="index-desc"><Todo>{p.description}</Todo></span>
-                <span className="index-cta">{p.link.label} →</span>
-              </span>
-              <span className="index-kicker mono"><Todo>{p.kicker}</Todo></span>
-            </a>
-          </FadeUp>
-        ))}
+        {projects.map((p, i) => {
+          // Projects without a link yet still get a row, just not a clickable one
+          const Row = p.link ? 'a' : 'div'
+          const linkProps = p.link ? { href: p.link.href, ...external(p.link.href) } : {}
+          return (
+            <FadeUp as="li" key={p.title} delay={i * 0.08}>
+              <Row className="index-row" onMouseEnter={() => setHover(i)} {...linkProps}>
+                <span className="index-no mono">{String(i + 2).padStart(2, '0')}</span>
+                <span className="index-main">
+                  <span className="index-title display"><Todo>{p.title}</Todo></span>
+                  <span className="index-desc"><Todo>{p.description}</Todo></span>
+                  {p.link && <span className="index-cta">{p.link.label} →</span>}
+                </span>
+                <span className="index-kicker mono"><Todo>{p.kicker}</Todo></span>
+              </Row>
+            </FadeUp>
+          )
+        })}
       </ol>
       <motion.div
         className={`index-cursor${current?.image ? ' has-image' : ''}`}

@@ -47,8 +47,8 @@ export default function Contact() {
             ))}
           </FadeUp>
           <LocationMap
-            location={profile.location} coordinates={profile.coordinates}
-            lat={profile.lat} lng={profile.lng} label={`Based in · ${profile.timezone}`}
+            location={profile.mapTitle} coordinates={profile.coordinates} zoom={15}
+            lat={profile.lat} lng={profile.lng} label={`${profile.mapLabel} · ${profile.timezone}`}
           />
         </div>
 
