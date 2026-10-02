@@ -2,14 +2,16 @@
 // draws across, then the title rising in line by line.
 import { motion } from 'framer-motion'
 import { RevealLines, EASE } from './Reveal.jsx'
+import Scramble from './Scramble.jsx'
 import './SectionHead.css'
 
-export default function SectionHead({ no, label, page, title, aside = null }) {
+// `shift` nudges the title off the left edge ("indent" or "right") so section openings don't all line up
+export default function SectionHead({ no, label, page, title, aside = null, shift = '' }) {
   return (
-    <header className="sh">
+    <header className={`sh${shift ? ` sh-${shift}` : ''}`}>
       <div className="sh-meta mono">
-        <span>{no} — {label}</span>
-        <span>p. {page}</span>
+        <Scramble text={`${no} — ${label}`} />
+        <Scramble text={`p. ${page}`} delay={0.15} />
         <motion.span
           className="sh-rule"
           initial={{ scaleX: 0 }}

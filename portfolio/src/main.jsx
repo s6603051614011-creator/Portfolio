@@ -17,9 +17,9 @@ const render = () =>
   )
 
 // Preloader (markup + styles in index.html): stays up until the page and fonts have
-// loaded and at least MIN_MS has passed, then the site renders and the loader fades out.
-// The app mounts as the loader fades so the hero's intro animation plays in view.
-const MIN_MS = 1200
+// loaded and its counter has reached 100 (MIN_MS), then the site renders and the sheet lifts off.
+// The app mounts as it lifts so the hero's intro animation plays in view.
+const MIN_MS = 1900
 const loader = document.getElementById('preloader')
 
 if (!loader) {
@@ -36,6 +36,6 @@ if (!loader) {
   Promise.race([Promise.all([loaded, minTime, fonts]), timeout]).then(() => {
     render()
     loader.classList.add('is-done')
-    setTimeout(() => loader.remove(), 600)
+    setTimeout(() => loader.remove(), 1000)
   })
 }

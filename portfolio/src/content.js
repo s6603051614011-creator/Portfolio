@@ -21,14 +21,16 @@ export const profile = {
   photoSide: '/profile-cutout.webp', // About section (transparent background)
   tagline: 'Keeping networks, code and AI hard to break.',
   taglineEmphasis: 'hard to break', // gets a hand-drawn underline
-  photoCaption: 'Fig. 1 — The author, Bangkok, 2026.',
+  photoCaption: 'Bangkok, 2026', // handwritten under the cover photo
+  photoNote: 'that’s me', // little pencilled note with an arrow, next to the cover photo
   stamp: 'Open to work ✱ Security ✱ Bangkok ✱ ', // text running round the circle on the cover
   intro:
     'Final-year Computer Engineering student at KMUTNB and incoming Security Engineer Intern at DCS. I work where networks, code and applied AI meet — and I care about keeping them secure.',
-  email: '[you@example.com]',
+  email: 's6603051614011@email.kmutnb.ac.th',
   github: 'https://github.com/[your-handle]',
-  linkedin: 'https://www.linkedin.com/in/[your-handle]',
-  cv: '/cv.pdf', // put your CV at public/cv.pdf
+  // Leave empty to hide. When you have them: 'https://www.linkedin.com/in/...' and '/cv.pdf' (file in public/)
+  linkedin: '',
+  cv: '',
 }
 
 export const terminal = [
@@ -39,7 +41,7 @@ export const terminal = [
 export const about = {
   heading: ['Hardware roots,', 'security focus.'],
   pullQuote: 'I’m drawn to the places where hardware and software meet — and to making them hard to break.',
-  photoCaption: 'Fig. 2 — Portrait, 2026.',
+  photoCaption: 'Portrait, 2026',
   paragraphs: [
     'I’m a final-year Electronics Engineering (Computer) student at King Mongkut’s University of Technology North Bangkok. I’m drawn to the places where hardware and software meet — networks, embedded and IoT systems — and to making them hard to break.',
     '[One or two sentences in your own words: what got you into security, and what you want to work on next.]',
@@ -58,15 +60,9 @@ export const featured = {
   description:
     'An end-to-end pipeline that reads Thai tax invoices and extracts structured fields. Fine-tuned Typhoon OCR 7B with QLoRA on real invoices expanded through augmentation, served through a FastAPI + React web app.',
   tags: ['Python', 'QLoRA', 'Typhoon OCR 7B', 'FastAPI', 'React', 'SQLite'],
-  metrics: [
-    { value: '[x.x%]', label: 'CER' },
-    { value: '[x.x%]', label: 'WER' },
-    { value: '[xx%]', label: 'Field accuracy' },
-  ],
-  links: [
-    { label: 'Read case study', href: '#' },
-    { label: 'Source code', href: 'https://github.com/[your-handle]' },
-  ],
+  // Optional — add when you have them, e.g. { value: '4.2%', label: 'CER' } / { label: 'Source code', href: '...' }
+  metrics: [],
+  links: [],
   image: null, // e.g. '/ocr-screenshot.png' (put the file in public/)
 }
 
@@ -101,12 +97,23 @@ export const experience = [
     org: 'King Mongkut’s University of Technology North Bangkok',
     note: 'Senior thesis: Automated Thai Tax Invoice OCR',
   },
+  {
+    period: '[Year]',
+    role: 'IT Support Intern',
+    org: 'Government Pharmaceutical Organization (GPO)',
+    note: '[What you looked after — e.g. which systems, users or hardware you supported]',
+  },
+  {
+    period: '[Start] – [Year]',
+    role: 'Vocational Certificate, Computer Technician',
+    org: 'Rajamangala University of Technology Phra Nakhon · North Bangkok Campus',
+    note: 'Where the hardware roots come from.',
+  },
 ]
 
 export const skills = [
   { group: 'Security', items: ['CIA Triad', 'OSI model', 'OWASP Top 10', 'NGFW concepts', 'Incident response', 'PDPA'] },
   { group: 'Build', items: ['Python', 'FastAPI', 'React', 'SQLite', 'Git', 'Linux basics'] },
-  { group: 'Applied AI', items: ['QLoRA fine-tuning', 'OCR pipelines', 'CER / WER evaluation'] },
 ]
 
 export const learning = ['Subnetting & routing', 'NGFW / Deep Packet Inspection', 'TryHackMe Pre-Security']

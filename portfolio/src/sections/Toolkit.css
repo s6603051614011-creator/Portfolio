@@ -1,6 +1,7 @@
 /* ---------- 04 Toolkit (sections/Toolkit) ---------- */
 .kit { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); row-gap: 48px; }
-.kit-col { grid-column: span 3; }
+.kit-col { grid-column: span 4; }
+.kit-col:nth-child(2) { margin-top: 56px; } /* second column sits lower, like it was pasted in */
 .kit-group { padding-bottom: 12px; margin-bottom: 8px; border-bottom: 1px solid var(--ink); color: var(--ink); }
 .kit-group span { color: var(--muted); }
 .kit-col ul, .kit-note ul { list-style: none; margin: 0; padding: 0; }
@@ -12,9 +13,9 @@
 
 /* Margin note — set at a slight angle, like it was added afterwards */
 /* `rotate`, not transform: framer-motion owns the transform for the fade-in */
-.kit-note { grid-column: span 3; align-self: start; rotate: -2deg; margin-top: 8px; color: var(--accent); }
-.kit-note-label { font-family: var(--f-display); font-style: italic; font-size: 24px; margin: 0 0 20px 12px; }
-.kit-note li { font-size: 15px; line-height: 1.5; padding: 4px 0 4px 18px; position: relative; color: var(--ink-2); }
+.kit-note { grid-column: span 4; align-self: start; rotate: -2deg; margin-top: 24px; padding-left: clamp(0px, 3vw, 40px); color: var(--accent); }
+.kit-note-label { font-size: 32px; margin: 0 0 22px 14px; }
+.kit-note li { font-family: var(--f-hand); font-size: 23px; line-height: 1.25; padding: 4px 0 4px 18px; position: relative; color: var(--ink-2); }
 .kit-note li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
 
 @media (max-width: 1099px) {
@@ -23,4 +24,5 @@
 }
 @media (max-width: 599px) {
   .kit-col, .kit-note { grid-column: 1 / -1; }
+  .kit-col:nth-child(2) { margin-top: 0; }
 }

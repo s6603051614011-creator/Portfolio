@@ -6,6 +6,8 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-
 import { issue, profile } from '../content.js'
 import { EASE } from './Reveal.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
+import Scramble from './Scramble.jsx'
+import { lockScroll } from '../lib/smoothScroll.js'
 import './Masthead.css'
 
 const NAV = [
@@ -85,10 +87,10 @@ export default function Masthead() {
     if (!open) return
     const onKey = (e) => e.key === 'Escape' && setOpen(false)
     document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
+    lockScroll(true)
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
+      lockScroll(false)
     }
   }, [open])
 
@@ -104,7 +106,7 @@ export default function Masthead() {
           <Link to="/" state={{ scrollTo: 'top' }} className="mh-brand" aria-label={`${profile.name}, home`}>
             {shortName}<span className="accent">.</span>
           </Link>
-          <span className="mh-issue mono">{issue.title} — No. {issue.no} · {issue.date}</span>
+          <span className="mh-issue mono"><Scramble text={`${issue.title} — No. ${issue.no} · ${issue.date}`} delay={1.6} /></span>
           <nav className="mh-nav" aria-label="Main">
             <NavLinks />
           </nav>
@@ -139,7 +141,7 @@ export default function Masthead() {
             </nav>
             <div className="menu-foot mono">
               <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>}
               <a href={`mailto:${profile.email}`}>Email</a>
             </div>
           </motion.div>

@@ -16,9 +16,10 @@ export default function Colophon() {
           <p>Set in Fraunces, Instrument Sans and JetBrains Mono. Built with React and Vite, deployed on Vercel. Printed nowhere.</p>
         </div>
         <ul className="colo-links">
+          <li><a href={`mailto:${profile.email}`}>Email</a></li>
           <li><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-          <li><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
-          <li><a href={profile.cv} download>CV ↓</a></li>
+          {profile.linkedin && <li><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>}
+          {profile.cv && <li><a href={profile.cv} download>CV ↓</a></li>}
         </ul>
       </div>
       <div className="colo-base mono">

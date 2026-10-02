@@ -4,14 +4,15 @@ import { profile } from '../content.js'
 import { FadeUp, RevealLines } from '../components/Reveal.jsx'
 import Magnetic from '../components/Magnetic.jsx'
 import Todo from '../components/Todo.jsx'
+import Scramble from '../components/Scramble.jsx'
 import './ContactCta.css'
 
 export default function ContactCta() {
   return (
-    <section id="contact" className="section container cta">
+    <section id="contact" className="section is-loose container cta">
       <div className="mono cta-meta">
-        <span>05 — Contact</span>
-        <span>p. 18</span>
+        <Scramble text="05 — Contact" />
+        <Scramble text="p. 18" delay={0.15} />
       </div>
       <RevealLines
         className="cta-title display"

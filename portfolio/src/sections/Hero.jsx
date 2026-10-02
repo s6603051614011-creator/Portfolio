@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { RevealLines, EASE } from '../components/Reveal.jsx'
 import Scribble from '../components/Scribble.jsx'
+import Scramble from '../components/Scramble.jsx'
+import { scrollToTarget } from '../lib/smoothScroll.js'
 import { issue, profile, terminal } from '../content.js'
 import './Hero.css'
 
@@ -41,6 +43,30 @@ function Stamp() {
   )
 }
 
+// Pencilled note with a loose arrow curling towards the photo
+function PhotoNote({ text }) {
+  return (
+    <motion.div
+      className="photo-note hand"
+      aria-hidden="true"
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, ease: EASE, delay: 1.7 }}
+    >
+      <span>{text}</span>
+      <svg viewBox="0 0 90 60" fill="none">
+        <motion.path
+          d="M6 10 C 28 4, 54 12, 66 30 C 72 39, 74 46, 76 52 M64 45 L 77 54 L 82 39"
+          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 0.9, ease: 'easeInOut', delay: 1.9 }}
+        />
+      </svg>
+    </motion.div>
+  )
+}
+
 export default function Hero() {
   const ref = useRef(null)
   const reduce = useReducedMotion()
@@ -50,15 +76,14 @@ export default function Hero() {
   const [first, ...rest] = profile.name.split(' ')
   const now = terminal[0]?.out
 
-  const scrollToWork = () =>
-    document.getElementById('work')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })
+  const scrollToWork = () => scrollToTarget(document.getElementById('work'))
 
   return (
     <section id="top" ref={ref} className="hero container">
       <div className="hero-strip mono">
-        <span>Vol. 1 — No. {issue.no}</span>
-        {now && <span className="hero-now">Now: {now}</span>}
-        <span>{profile.location.split(',')[0]} · {profile.timezone}</span>
+        <Scramble text={`Vol. 1 — No. ${issue.no}`} delay={0.2} />
+        {now && <Scramble className="hero-now" text={`Now: ${now}`} delay={0.4} />}
+        <Scramble text={`${profile.location.split(',')[0]} · ${profile.timezone}`} delay={0.6} />
         <motion.span
           className="hero-rule"
           initial={{ scaleX: 0 }}
@@ -78,13 +103,21 @@ export default function Hero() {
         />
 
         <div className="hero-visual">
+          {/* A print taped to the page: drops in, settles at a slight angle, straightens on hover */}
           <motion.figure
             className="hero-figure"
-            initial={{ clipPath: 'inset(100% 0 0 0)' }}
-            animate={{ clipPath: 'inset(0% 0 0 0)' }}
-            transition={{ duration: 1.2, ease: EASE, delay: 0.35 }}
+            initial={{ opacity: 0, y: 60, rotate: 7 }}
+            animate={{ opacity: 1, y: 0, rotate: -2.5 }}
+            whileHover={{ rotate: 0, y: -6, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 110, damping: 14, delay: 0.45 }}
           >
-            <div className="hero-photo">
+            <span className="tape" aria-hidden="true" />
+            <motion.div
+              className="hero-photo"
+              initial={{ clipPath: 'inset(100% 0 0 0)' }}
+              animate={{ clipPath: 'inset(0% 0 0 0)' }}
+              transition={{ duration: 1.1, ease: EASE, delay: 0.6 }}
+            >
               <motion.img
                 src={profile.photo}
                 alt={`Portrait of ${profile.name}`}
@@ -92,10 +125,11 @@ export default function Hero() {
                 fetchPriority="high"
                 style={reduce ? undefined : { y: imgY, scale: 1.15 }}
               />
-            </div>
-            <figcaption className="mono">{profile.photoCaption}</figcaption>
+            </motion.div>
+            <figcaption className="hand">{profile.photoCaption}</figcaption>
           </motion.figure>
           <Stamp />
+          {profile.photoNote && <PhotoNote text={profile.photoNote} />}
         </div>
 
         <motion.div
@@ -109,7 +143,7 @@ export default function Hero() {
           <div className="hero-actions">
             <Link to="/contact" className="btn btn-primary">Get in touch <span className="arrow">→</span></Link>
             <button type="button" className="btn" onClick={scrollToWork}>See the work</button>
-            <a href={profile.cv} className="link-line" download>Download CV</a>
+            {profile.cv && <a href={profile.cv} className="link-line" download>Download CV</a>}
           </div>
         </motion.div>
       </div>

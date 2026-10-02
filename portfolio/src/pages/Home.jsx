@@ -8,18 +8,20 @@ import Experience from '../sections/Experience.jsx'
 import Toolkit from '../sections/Toolkit.jsx'
 import ContactCta from '../sections/ContactCta.jsx'
 import { profile } from '../content.js'
+import { scrollToTarget } from '../lib/smoothScroll.js'
 
-const prefersReducedMotion = () =>
-  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-
-// Masthead links navigate to "/" with { scrollTo: id }, so they work from any page
+// Masthead links navigate to "/" with { scrollTo: id }, so they work from any page.
+// The short wait lets a page transition finish resetting the scroll first.
 function useScrollToSection() {
   const location = useLocation()
   useEffect(() => {
     const id = location.state?.scrollTo
     if (!id) return
-    const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' })
+    const t = setTimeout(() => {
+      const el = document.getElementById(id)
+      if (el) scrollToTarget(id === 'top' ? 0 : el)
+    }, 60)
+    return () => clearTimeout(t)
   }, [location.key, location.state])
 }
 

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import ContactForm from '../components/ContactForm.jsx'
 import { FadeUp, RevealLines } from '../components/Reveal.jsx'
 import Todo from '../components/Todo.jsx'
+import Scramble from '../components/Scramble.jsx'
 import { LocationMap } from '../components/ui/ExpandMap.jsx'
 import { issue, profile } from '../content.js'
 import './Contact.css'
@@ -16,19 +17,19 @@ export default function Contact() {
     { label: 'Email', href: `mailto:${profile.email}`, text: profile.email },
     { label: 'LinkedIn', href: profile.linkedin, text: profile.linkedin.replace('https://www.', ''), external: true },
     { label: 'GitHub', href: profile.github, text: profile.github.replace('https://', ''), external: true },
-  ]
+  ].filter((r) => r.href)
 
   return (
     <div className="container contact-page">
       <div className="contact-strip mono">
-        <span>Letters to the editor</span>
-        <span>{issue.title} — No. {issue.no}</span>
+        <Scramble text="Letters to the editor" delay={0.3} />
+        <Scramble text={`${issue.title} — No. ${issue.no}`} delay={0.45} />
       </div>
 
       <div className="contact-grid">
         <div className="contact-info">
           <RevealLines
-            as="h1" immediate delay={0.1}
+            as="h1" immediate delay={0.5}
             className="contact-title display"
             lines={['Let’s talk', <em key="s">security<span className="accent">.</span></em>]}
           />

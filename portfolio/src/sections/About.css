@@ -1,9 +1,13 @@
 /* ---------- 01 About (sections/About) ---------- */
 .about-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); align-items: start; }
-.about-figure { grid-column: 1 / 6; margin: 0; }
+.about-figure-wrap { grid-column: 1 / 6; }
+/* `rotate`, not transform: framer-motion owns the transform for the fade-in */
+.about-figure { position: relative; margin: 0; rotate: 1.8deg; }
 .about-photo { aspect-ratio: 1; overflow: hidden; background: var(--accent); }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: bottom; }
-.about-figure figcaption { margin-top: 10px; text-transform: none; letter-spacing: 0; font-size: 11px; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: bottom; transition: scale .8s var(--ease); }
+.about-figure:hover .about-photo img { scale: 1.04; }
+.about-figure figcaption { margin-top: 8px; font-size: 22px; color: var(--ink-2); }
+.tape-corner { top: -12px; left: -18px; margin: 0; width: 96px; rotate: -32deg; }
 
 .about-body { grid-column: 7 / 13; display: flex; flex-direction: column; gap: 22px; padding-top: 6px; }
 .about-p { font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 58ch; }
@@ -29,7 +33,7 @@
 
 @media (max-width: 899px) {
   .about-grid, .pull { grid-template-columns: minmax(0, 1fr); }
-  .about-figure { grid-column: 1; width: min(80%, 380px); margin-bottom: 40px; }
+  .about-figure-wrap { grid-column: 1; width: min(80%, 380px); margin: 0 0 48px 6%; }
   .about-body { grid-column: 1; }
   .pull-quote, .pull figcaption { grid-column: 1; }
   .pull-quote { padding-left: .5em; }
