@@ -8,6 +8,7 @@ import CountUp from '../components/CountUp.jsx'
 import { FadeUp, RevealLines } from '../components/Reveal.jsx'
 import Todo from '../components/Todo.jsx'
 import Scramble from '../components/Scramble.jsx'
+import InvoiceScan from '../components/InvoiceScan.jsx'
 import './Work.css'
 
 const external = (href) => (href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})
@@ -43,13 +44,7 @@ function Feature() {
       <TiltPlate>
         {featured.image
           ? <img src={featured.image} alt={`${featured.title} screenshot`} loading="lazy" />
-          : (
-            <div className="plate-empty">
-              <span className="mono">Plate 1</span>
-              <p className="display">Invoice in, <em>structured fields</em> out.</p>
-              <span className="mono">Screenshot pending — set featured.image</span>
-            </div>
-          )}
+          : <InvoiceScan />}
       </TiltPlate>
 
       <div className="feature-body">

@@ -1,5 +1,5 @@
-// The cover: oversized name, the portrait set off to the right with a caption,
-// a stamp that slowly turns, and the tagline as the cover line.
+// The cover: oversized name, the portrait set off to the right as a framed print with
+// crop marks and a pen note, and the tagline as the cover line.
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
@@ -23,27 +23,7 @@ function CoverLine() {
   )
 }
 
-function Stamp() {
-  return (
-    <motion.div
-      className="stamp"
-      aria-hidden="true"
-      initial={{ opacity: 0, scale: 0.6, rotate: -40 }}
-      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-      transition={{ duration: 1, ease: EASE, delay: 1.1 }}
-    >
-      <svg viewBox="0 0 120 120" className="stamp-ring">
-        <defs>
-          <path id="stamp-path" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" />
-        </defs>
-        <text><textPath href="#stamp-path" textLength="286" lengthAdjust="spacing">{profile.stamp.toUpperCase()}</textPath></text>
-      </svg>
-      <span className="stamp-mark">✱</span>
-    </motion.div>
-  )
-}
-
-// Pencilled note with a loose arrow curling towards the photo
+// Pen note with a loose arrow curling towards the photo
 function PhotoNote({ text }) {
   return (
     <motion.div
@@ -103,32 +83,34 @@ export default function Hero() {
         />
 
         <div className="hero-visual">
-          {/* A print taped to the page: drops in, settles at a slight angle, straightens on hover */}
           <motion.figure
             className="hero-figure"
-            initial={{ opacity: 0, y: 60, rotate: 7 }}
-            animate={{ opacity: 1, y: 0, rotate: -2.5 }}
-            whileHover={{ rotate: 0, y: -6, scale: 1.015 }}
-            transition={{ type: 'spring', stiffness: 110, damping: 14, delay: 0.45 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: EASE, delay: 0.45 }}
           >
-            <span className="tape" aria-hidden="true" />
-            <motion.div
-              className="hero-photo"
-              initial={{ clipPath: 'inset(100% 0 0 0)' }}
-              animate={{ clipPath: 'inset(0% 0 0 0)' }}
-              transition={{ duration: 1.1, ease: EASE, delay: 0.6 }}
-            >
-              <motion.img
-                src={profile.photo}
-                alt={`Portrait of ${profile.name}`}
-                width="640" height="852"
-                fetchPriority="high"
-                style={reduce ? undefined : { y: imgY, scale: 1.15 }}
-              />
-            </motion.div>
-            <figcaption className="hand">{profile.photoCaption}</figcaption>
+            <div className="hero-frame frame">
+              <span className="crop crop-tl" aria-hidden="true" />
+              <span className="crop crop-tr" aria-hidden="true" />
+              <span className="crop crop-bl" aria-hidden="true" />
+              {/* no bottom-right mark: that's where the offset frame sits */}
+              <motion.div
+                className="hero-photo"
+                initial={{ clipPath: 'inset(100% 0 0 0)' }}
+                animate={{ clipPath: 'inset(0% 0 0 0)' }}
+                transition={{ duration: 1.1, ease: EASE, delay: 0.6 }}
+              >
+                <motion.img
+                  src={profile.photo}
+                  alt={`Portrait of ${profile.name}`}
+                  width="640" height="852"
+                  fetchPriority="high"
+                  style={reduce ? undefined : { y: imgY, scale: 1.15 }}
+                />
+              </motion.div>
+            </div>
+            <figcaption className="mono">Fig. 1 — {profile.photoCaption}</figcaption>
           </motion.figure>
-          <Stamp />
           {profile.photoNote && <PhotoNote text={profile.photoNote} />}
         </div>
 

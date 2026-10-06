@@ -14,7 +14,7 @@
 .magnetic { display: inline-block; }
 .cta-circle {
   width: 152px; height: 152px; border-radius: 50%; display: grid; place-content: center; text-align: center;
-  background: var(--accent); color: var(--on-accent); text-decoration: none;
+  background: var(--highlight); color: var(--on-highlight); text-decoration: none;
   font-family: var(--f-display); font-style: italic; font-size: 22px; line-height: 1.1;
   transition: background .25s;
 }

@@ -23,13 +23,12 @@ export const profile = {
   photoSide: '/profile-cutout.webp', // About section (transparent background)
   tagline: 'Keeping networks, code and AI hard to break.',
   taglineEmphasis: 'hard to break', // gets a hand-drawn underline
-  photoCaption: 'Bangkok, 2026', // handwritten under the cover photo
-  photoNote: 'that’s me', // little pencilled note with an arrow, next to the cover photo
-  stamp: 'Open to work ✱ Security ✱ Bangkok ✱ ', // text running round the circle on the cover
+  photoCaption: 'Bangkok, 2026', // under the cover photo, after "Fig. 1 —"
+  photoNote: 'that’s me', // little pen note with an arrow, next to the cover photo
   intro:
     'Final-year Computer Engineering student at KMUTNB and incoming Security Engineer Intern at DCS. I work where networks, code and applied AI meet — and I care about keeping them secure.',
   email: 's6603051614011@email.kmutnb.ac.th',
-  github: 'https://github.com/[your-handle]',
+  github: 'https://github.com/s6603051614011-creator',
   // Leave empty to hide. When you have them: 'https://www.linkedin.com/in/...' and '/cv.pdf' (file in public/)
   linkedin: '',
   cv: '',
@@ -60,8 +59,8 @@ export const featured = {
   kicker: 'Senior thesis · In progress',
   title: 'Automated Thai Tax Invoice OCR',
   description:
-    'An end-to-end pipeline that reads Thai tax invoices and extracts structured fields. Fine-tuned a Vision-Language Model (Typhoon OCR 7B) in Python with QLoRA — including data preprocessing, augmentation and accuracy evaluation — served through a FastAPI + React web app.',
-  tags: ['Python', 'QLoRA', 'Typhoon OCR 7B', 'FastAPI', 'React', 'SQLite'],
+    'An end-to-end pipeline that reads Thai tax invoices and extracts structured fields. Fine-tuned a Vision-Language Model (Typhoon OCR 1.5 2B) in Python with QLoRA — including data preprocessing, augmentation and accuracy evaluation — served through a FastAPI + React web app.',
+  tags: ['Python', 'QLoRA', 'Typhoon OCR 1.5 2B', 'FastAPI', 'React', 'SQLite'],
   // Optional — add when you have them, e.g. { value: '4.2%', label: 'CER' } / { label: 'Source code', href: '...' }
   metrics: [],
   links: [],
@@ -74,7 +73,7 @@ export const projects = [
     title: 'This portfolio, secure by default',
     description:
       'Vite + React on Vercel. Strict security headers, no secrets committed to the repo, and a spam-resistant contact form.',
-    link: { label: 'Source code', href: 'https://github.com/[your-handle]/portfolio' },
+    link: { label: 'Source code', href: 'https://github.com/s6603051614011-creator/Portfolio' },
     image: null, // optional: shows as a floating preview on hover
   },
   {
@@ -90,12 +89,14 @@ export const projects = [
 // Work and internships, newest first
 export const experience = [
   {
+    host: 'dcs', // matches a hop in `route` below
     period: 'Dec 2026 – Apr 2027',
     role: 'Security Engineer Intern',
     org: 'Datapro Computer Systems (DCS) · Professional Service Operations',
     note: '[Key responsibilities — add once the internship starts]',
   },
   {
+    host: 'gpo',
     period: 'Oct 2023 – Dec 2023',
     role: 'IT Support Intern',
     org: 'Government Pharmaceutical Organization · Ratchathewi Branch',
@@ -110,17 +111,29 @@ export const experience = [
 // Schooling, newest first
 export const education = [
   {
+    host: 'kmutnb',
     period: '2023 – Present',
     role: 'B.Eng. Electronics Engineering (Computer)',
     org: 'King Mongkut’s University of Technology North Bangkok · EnET-C',
     note: 'Coursework spanning embedded systems, computer networks, software development and machine learning. Senior thesis: Automated Thai Tax Invoice OCR.',
   },
   {
+    host: 'rmutp',
     period: '2021 – 2023',
     role: 'Vocational Certificate, Computer Technician',
     org: 'Rajamangala University of Technology Phra Nakhon · GPAX 3.65',
     note: 'Coursework in computer hardware, operating systems and basic networking.',
   },
+]
+
+// The path so far, printed as a traceroute at the top of Experience. Oldest hop first;
+// `host` links a hop to the entry above with the same host. `pending: true` shows the
+// "* * *" of a hop that hasn't answered yet.
+export const route = [
+  { host: 'rmutp', what: 'Vocational Certificate, Computer Technician', when: '2021–2023' },
+  { host: 'gpo', what: 'IT Support Intern, Ratchathewi Branch', when: 'Oct–Dec 2023' },
+  { host: 'kmutnb', what: 'B.Eng. Electronics Engineering (Computer)', when: '2023–now' },
+  { host: 'dcs', what: 'Security Engineer Intern', when: 'Dec 2026', pending: true },
 ]
 
 export const skills = [

@@ -1,4 +1,4 @@
-// 01 — About: portrait on a block of the accent colour, copy with a drop cap,
+// 01 — About: framed portrait on a block of the accent colour, copy with a drop cap,
 // facts as a ruled table, then a pull quote that inks in as you scroll.
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
@@ -19,11 +19,14 @@ function Portrait() {
   return (
     <motion.div ref={ref} className="about-figure-wrap" style={reduce ? undefined : { y }}>
       <FadeUp as="figure" className="about-figure">
-        <span className="tape tape-corner" aria-hidden="true" />
-        <div className="about-photo">
-          <img src={profile.photoSide} alt={`Portrait of ${profile.name}`} width="500" height="500" loading="lazy" />
+        <div className="about-frame frame">
+          <span className="crop crop-tl" aria-hidden="true" />
+          <span className="crop crop-br" aria-hidden="true" />
+          <div className="about-photo">
+            <img src={profile.photoSide} alt={`Portrait of ${profile.name}`} width="500" height="500" loading="lazy" />
+          </div>
         </div>
-        <figcaption className="hand">{about.photoCaption}</figcaption>
+        <figcaption className="mono">Fig. 2 — {about.photoCaption}</figcaption>
       </FadeUp>
     </motion.div>
   )

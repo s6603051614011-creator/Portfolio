@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content="Ratklao Pholpikul — Computer Engineering student at KMUTNB and incoming Security Engineer Intern. Projects, experience and contact." />
-    <meta name="theme-color" content="#F1ECE2" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#14120F" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F4F6FB" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B1640" media="(prefers-color-scheme: dark)" />
     <script src="/theme-init.js"></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="preload" href="/profile.jpg" as="image" fetchpriority="high" />
     <title>Ratklao Pholpikul — Field Notes</title>
     <!-- Preloader styles live here (not styles.css) so they apply before any JS/CSS bundle loads.
@@ -20,16 +20,16 @@
          whole sheet lifts off the top. The counter is a CSS-animated custom property. */
       @property --pl-n { syntax: '<integer>'; initial-value: 0; inherits: false; }
       #preloader {
-        --pl-paper: #F1ECE2; --pl-ink: #171513; --pl-accent: #C23B22; --pl-muted: #6B645A;
+        --pl-paper: #F4F6FB; --pl-ink: #0B1640; --pl-accent: #1B3A9C; --pl-muted: #55628F;
         --pl-time: 1.7s; --pl-ease: cubic-bezier(.3, .6, .2, 1);
         position: fixed; inset: 0; z-index: 9999; overflow: hidden;
         background: var(--pl-paper); color: var(--pl-ink);
         transition: transform .95s cubic-bezier(.76, 0, .24, 1);
       }
       @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) #preloader { --pl-paper: #14120F; --pl-ink: #EDE6D8; --pl-accent: #E2583D; --pl-muted: #9A9183; }
+        :root:not([data-theme="light"]) #preloader { --pl-paper: #0B1640; --pl-ink: #EDF1FF; --pl-accent: #FFD23F; --pl-muted: #9DAAD8; }
       }
-      :root[data-theme="dark"] #preloader { --pl-paper: #14120F; --pl-ink: #EDE6D8; --pl-accent: #E2583D; --pl-muted: #9A9183; }
+      :root[data-theme="dark"] #preloader { --pl-paper: #0B1640; --pl-ink: #EDF1FF; --pl-accent: #FFD23F; --pl-muted: #9DAAD8; }
       #preloader.is-done { transform: translateY(-100%); }
       #preloader .pl-inner {
         height: 100%; display: flex; flex-direction: column; justify-content: space-between;

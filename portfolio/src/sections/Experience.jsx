@@ -1,16 +1,18 @@
-// 03 — Experience: printed on a slightly darker band, split into two columns —
-// work on one side, schooling on the other. Each has a thin line down its edge
-// that fills in as you read through the entries.
-import { useRef } from 'react'
+// 03 — Experience: printed on a slightly darker band. Opens with the whole path as a
+// traceroute, then the details in two columns — work on one side, schooling on the other.
+// Each hop in the traceroute points at its entry: hover lights it up, click scrolls to it.
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { education, experience } from '../content.js'
 import SectionHead from '../components/SectionHead.jsx'
 import { EASE, FadeUp } from '../components/Reveal.jsx'
 import Scramble from '../components/Scramble.jsx'
 import Todo from '../components/Todo.jsx'
+import { scrollToTarget } from '../lib/smoothScroll.js'
+import Route from './Route.jsx'
 import './Experience.css'
 
-function Timeline({ title, entries, delay = 0 }) {
+function Timeline({ title, entries, delay = 0, lit }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.75', 'end 0.6'] })
   const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 24 })
@@ -25,7 +27,7 @@ function Timeline({ title, entries, delay = 0 }) {
         <motion.span className="xp-progress" style={{ scaleY: fill }} aria-hidden="true" />
         <ol className="xp">
           {entries.map((e) => (
-            <li key={e.role} className="xp-row">
+            <li key={e.role} id={e.host ? `xp-${e.host}` : undefined} className={`xp-row${lit && lit === e.host ? ' is-lit' : ''}`}>
               <motion.span
                 className="xp-rule"
                 initial={{ scaleX: 0 }}
@@ -51,6 +53,24 @@ function Timeline({ title, entries, delay = 0 }) {
 }
 
 export default function Experience() {
+  const [hovered, setHovered] = useState(null)
+  const [picked, setPicked] = useState(null)
+
+  // A picked entry stays lit for a moment after the scroll lands on it
+  useEffect(() => {
+    if (!picked) return
+    const t = setTimeout(() => setPicked(null), 2200)
+    return () => clearTimeout(t)
+  }, [picked])
+
+  const pick = (host) => {
+    const el = document.getElementById(`xp-${host}`)
+    if (!el) return
+    scrollToTarget(el)
+    setPicked(host)
+  }
+  const lit = picked ?? hovered
+
   return (
     <section id="experience" className="section band">
       <div className="container">
@@ -58,9 +78,10 @@ export default function Experience() {
           no="03" label="Experience" page="12"
           title={['Where I’ve', <em key="l">been learning<span className="accent">.</span></em>]}
         />
+        <Route lit={lit} onLight={setHovered} onPick={pick} />
         <div className="xp-cols">
-          <Timeline title="Work & internships" entries={experience} />
-          <Timeline title="Education" entries={education} delay={0.15} />
+          <Timeline title="Work & internships" entries={experience} lit={lit} />
+          <Timeline title="Education" entries={education} delay={0.15} lit={lit} />
         </div>
       </div>
     </section>

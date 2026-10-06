@@ -1,0 +1,83 @@
+/* ---------- Plate 1 illustration (components/InvoiceScan) ----------
+   Everything is sized off the plate's width (cqw) so it scales as one picture. */
+.inv {
+  container-type: inline-size; position: relative; height: 100%;
+  display: grid; grid-template-columns: 56% 1fr; gap: 5cqw; align-items: center; padding: 6cqw 5cqw;
+  font-family: var(--f-body); color: var(--ink);
+}
+.inv-sheet {
+  /* a real white sheet laid on the blueprint, so it keeps its own paper-and-ink colours */
+  --ink: #10204F; --muted: #5C6B94; --paper-2: #EEF1F7; --paper-3: #DDE3EF; --rule: #C9D1E3;
+  --accent: #D99A00; --on-accent: #1B2A5C;
+  position: relative; aspect-ratio: 1 / 1.3; background: #FFFFFF; color: var(--ink); border-radius: 3px;
+  box-shadow: var(--shadow); overflow: hidden; font-size: 1.55cqw;
+}
+.inv-head { position: absolute; top: 6%; left: 7%; right: 7%; display: flex; justify-content: space-between; align-items: flex-start; }
+.inv-head b { display: block; font-size: 1.6em; font-weight: 600; letter-spacing: 0; }
+.inv-head span { font: 500 .8em/1.4 var(--f-mono); letter-spacing: .08em; color: var(--muted); }
+.inv-logo { width: 3.4em; height: 3.4em; border-radius: 3px; background: var(--paper-3); }
+.inv-bar { position: absolute; left: 7%; height: .55em; border-radius: 2px; background: var(--paper-3); }
+
+.inv-field { position: absolute; top: var(--at); left: 7%; right: 7%; display: flex; justify-content: space-between; align-items: baseline; gap: 1em; }
+.inv-label { color: var(--muted); }
+.inv-value { font-family: var(--f-mono); font-weight: 500; }
+.inv-total .inv-value { font-size: 1.35em; }
+.inv-item { position: absolute; left: 7%; right: 7%; display: flex; justify-content: space-between; }
+.inv-item span { height: .55em; border-radius: 2px; background: var(--paper-2); }
+.inv-item span:first-child { width: 52%; }
+.inv-item span:last-child { width: 16%; }
+.inv-stamp {
+  position: absolute; right: 6%; bottom: 4%; padding: .2em .6em; border: 1px solid var(--rule); border-radius: 3px;
+  font: 500 .75em/1.4 var(--f-mono); letter-spacing: .14em; color: var(--muted);
+}
+
+/* Detection box + tag, shown from the moment the scan line reaches the field */
+.inv-box {
+  position: absolute; inset: -.45em -.6em; border: 1.5px solid var(--accent); border-radius: 2px;
+  opacity: 0; animation: inv-show 6s var(--d) infinite;
+}
+.inv-tag {
+  position: absolute; left: -1.5px; bottom: 100%; padding: .15em .45em; border-radius: 2px 2px 0 0;
+  background: var(--accent); color: var(--on-accent); font: 500 .72em/1.3 var(--f-mono); letter-spacing: .04em; white-space: nowrap;
+}
+
+.inv-scan {
+  position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--accent);
+  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--accent) 45%, transparent);
+  animation: inv-scan 6s linear infinite;
+}
+.inv-scan::before {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 2px; height: 3.5em;
+  background: linear-gradient(transparent, color-mix(in srgb, var(--accent) 10%, transparent));
+}
+@keyframes inv-scan {
+  0% { top: 0; opacity: 1; }
+  66.6% { top: 100%; opacity: 1; }
+  67%, 100% { top: 100%; opacity: 0; }
+}
+@keyframes inv-show {
+  0% { opacity: 0; }
+  2%, 55% { opacity: 1; }
+  62%, 100% { opacity: 0; }
+}
+
+/* Extracted fields, lighting up as they're found */
+.inv-json {
+  margin: 0; padding: 1.4em 1.5em; border-radius: var(--radius); background: var(--ink); color: var(--paper);
+  font: 400 1.5cqw/1.75 var(--f-mono); white-space: pre; overflow: hidden;
+}
+.inv-json > span { display: block; }
+.inv-json-k { color: color-mix(in srgb, var(--paper) 60%, var(--ink)); }
+.inv-json-line { opacity: .22; animation: inv-line 6s var(--d) infinite; }
+.inv-json-line .inv-json-k { color: color-mix(in srgb, var(--accent) 55%, var(--paper)); }
+@keyframes inv-line {
+  0% { opacity: .22; }
+  2%, 55% { opacity: 1; }
+  62%, 100% { opacity: .22; }
+}
+
+/* Reduced motion: the finished result, no scanning */
+@media (prefers-reduced-motion: reduce) {
+  .inv-scan { display: none; }
+  .inv-box, .inv-json-line { animation: none !important; opacity: 1; }
+}

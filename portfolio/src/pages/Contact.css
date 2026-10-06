@@ -23,7 +23,10 @@
 }
 
 /* ---------- Form (components/ContactForm) ---------- */
-.form-card { display: flex; flex-direction: column; gap: 24px; padding-top: 20px; border-top: 1px solid var(--ink); }
+.form-card {
+  display: flex; flex-direction: column; gap: 24px; padding: clamp(24px, 3vw, 40px);
+  background: var(--print); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow);
+}
 .form-card .h4 { font-family: var(--f-display); font-weight: 400; font-size: 34px; line-height: 1.05; letter-spacing: -.02em; }
 .form-head { display: flex; flex-direction: column; gap: 6px; }
 .topics { margin: 0; padding: 0; border: 0; }
@@ -33,25 +36,24 @@
 .topic input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .topic span {
   min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center;
-  border-radius: 999px; border: 1px solid var(--rule); font-size: 14px; font-weight: 500;
+  border-radius: var(--radius); border: 1px solid var(--rule); font-size: 14px; font-weight: 500;
   transition: background .2s, border-color .2s, color .2s;
 }
 .topic input:hover + span { border-color: var(--ink); }
-.topic input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.topic input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .topic input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; }
 .field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 @media (max-width: 599px) { .field-row { grid-template-columns: 1fr; } }
 .field { display: flex; flex-direction: column; gap: 4px; }
 .field label { font: 500 12px/1.5 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-/* Fields are a rule to write on, not boxes */
 .field input, .field textarea {
-  width: 100%; min-height: 48px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--rule); border-radius: 0;
-  background: transparent; color: var(--ink); font: 18px/1.5 var(--f-body); transition: border-color .2s;
+  width: 100%; min-height: 48px; padding: 11px 14px; border: 1px solid var(--rule); border-radius: var(--radius);
+  background: var(--paper); color: var(--ink); font: 16px/1.5 var(--f-body); transition: border-color .2s, box-shadow .2s;
 }
 .field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: .7; }
 .field textarea { resize: vertical; min-height: 140px; }
-.field input:focus, .field textarea:focus { outline: none; border-bottom: 2px solid var(--accent); margin-bottom: -1px; }
-.field [aria-invalid="true"] { border-bottom: 2px solid var(--danger); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+.field [aria-invalid="true"] { border-color: var(--danger); }
 .field-error { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--danger); margin-top: 4px; }
 .field-error svg { flex-shrink: 0; }
 .form-alert {
@@ -73,9 +75,9 @@
 .lmap { position: relative; display: inline-block; align-self: flex-start; perspective: 1000px; max-width: 100%; padding-bottom: 24px; }
 .lmap-card {
   position: relative; max-width: 100%; overflow: hidden; isolation: isolate;
-  border-radius: 4px; background: var(--paper-2); border: 1px solid var(--rule); color: var(--ink);
+  border-radius: var(--radius); background: var(--print); border: 1px solid var(--rule); color: var(--ink); box-shadow: var(--shadow);
 }
-.lmap-card.is-expanded { border-color: var(--ink); }
+.lmap-card.is-expanded { border-color: var(--accent); }
 .lmap-grid {
   position: absolute; inset: 0; opacity: .5; pointer-events: none;
   background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
@@ -86,9 +88,9 @@
 
 .lmap-real, .lmap-leaflet { position: absolute; inset: 0; }
 .lmap-leaflet { background: var(--paper-2); font-family: var(--f-body); }
-/* OSM's default colours are loud; knock them back to match the paper, and flip them for dark mode */
-.lmap-real.is-light .leaflet-tile-pane { filter: grayscale(.55) sepia(.28) contrast(.95) brightness(1.02); }
-.lmap-real.is-dark .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) grayscale(.6) brightness(.82) contrast(.9); }
+/* OSM tiles washed into the theme: pale blue on the whiteprint, inverted into a blueprint at night */
+.lmap-real .leaflet-tile-pane { filter: grayscale(1) sepia(.35) hue-rotate(185deg) saturate(1.8) brightness(1.03); }
+.lmap-real.is-dark .leaflet-tile-pane { filter: grayscale(1) invert(1) sepia(1) hue-rotate(185deg) saturate(2.2) brightness(.55) contrast(1.1); }
 .lmap-loading, .lmap-failed {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   background: var(--paper-2); color: var(--muted); font-size: 13px; font-family: var(--f-mono);

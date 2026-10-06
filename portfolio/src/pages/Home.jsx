@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Hero from '../sections/Hero.jsx'
-import Marquee from '../sections/Marquee.jsx'
 import About from '../sections/About.jsx'
 import Work from '../sections/Work.jsx'
 import Experience from '../sections/Experience.jsx'
@@ -32,7 +31,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Marquee />
       <About />
       <Work />
       <Experience />
