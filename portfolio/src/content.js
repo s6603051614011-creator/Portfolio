@@ -23,8 +23,8 @@ export const profile = {
   photoSide: '/profile-cutout.webp', // About section (transparent background)
   tagline: 'Keeping networks, code and AI hard to break.',
   taglineEmphasis: 'hard to break', // gets a hand-drawn underline
-  photoCaption: 'Bangkok, 2026', // under the cover photo, after "Fig. 1 —"
-  photoNote: 'that’s me', // little pen note with an arrow, next to the cover photo
+  markCaption: 'R, set in Fraunces. Move across it to change the weight.', // under the cover initial, after "Fig. 1 —"
+  markNote: 'R, for Ratklao', // little pen note with an arrow, next to the cover initial
   intro:
     'Final-year Computer Engineering student at KMUTNB and incoming Security Engineer Intern at DCS. I work where networks, code and applied AI meet — and I care about keeping them secure.',
   email: 's6603051614011@email.kmutnb.ac.th',

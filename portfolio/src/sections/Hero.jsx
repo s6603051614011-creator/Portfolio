@@ -1,11 +1,11 @@
-// The cover: oversized name, the portrait set off to the right as a framed print with
-// crop marks and a pen note, and the tagline as the cover line.
-import { useRef } from 'react'
+// The cover: oversized name, a big initial drawn as a type specimen on the right
+// (with a pen note), and the tagline as the cover line.
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { RevealLines, EASE } from '../components/Reveal.jsx'
 import Scribble from '../components/Scribble.jsx'
 import Scramble from '../components/Scramble.jsx'
+import LetterSpec from '../components/LetterSpec.jsx'
 import { scrollToTarget } from '../lib/smoothScroll.js'
 import { issue, profile, terminal } from '../content.js'
 import './Hero.css'
@@ -23,11 +23,11 @@ function CoverLine() {
   )
 }
 
-// Pen note with a loose arrow curling towards the photo
-function PhotoNote({ text }) {
+// Pen note with a loose arrow curling towards the initial
+function MarkNote({ text }) {
   return (
     <motion.div
-      className="photo-note hand"
+      className="mark-note hand"
       aria-hidden="true"
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
@@ -48,18 +48,13 @@ function PhotoNote({ text }) {
 }
 
 export default function Hero() {
-  const ref = useRef(null)
-  const reduce = useReducedMotion()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  // Image is scaled up 15%, so it can drift ±6% without showing an edge
-  const imgY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%'])
   const [first, ...rest] = profile.name.split(' ')
   const now = terminal[0]?.out
 
   const scrollToWork = () => scrollToTarget(document.getElementById('work'))
 
   return (
-    <section id="top" ref={ref} className="hero container">
+    <section id="top" className="hero container">
       <div className="hero-strip mono">
         <Scramble text={`Vol. 1 — No. ${issue.no}`} delay={0.2} />
         {now && <Scramble className="hero-now" text={`Now: ${now}`} delay={0.4} />}
@@ -83,35 +78,14 @@ export default function Hero() {
         />
 
         <div className="hero-visual">
-          <motion.figure
-            className="hero-figure"
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: EASE, delay: 0.45 }}
+            transition={{ duration: 1, ease: EASE, delay: 0.3 }}
           >
-            <div className="hero-frame frame">
-              <span className="crop crop-tl" aria-hidden="true" />
-              <span className="crop crop-tr" aria-hidden="true" />
-              <span className="crop crop-bl" aria-hidden="true" />
-              {/* no bottom-right mark: that's where the offset frame sits */}
-              <motion.div
-                className="hero-photo"
-                initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ duration: 1.1, ease: EASE, delay: 0.6 }}
-              >
-                <motion.img
-                  src={profile.photo}
-                  alt={`Portrait of ${profile.name}`}
-                  width="640" height="852"
-                  fetchPriority="high"
-                  style={reduce ? undefined : { y: imgY, scale: 1.15 }}
-                />
-              </motion.div>
-            </div>
-            <figcaption className="mono">Fig. 1 — {profile.photoCaption}</figcaption>
-          </motion.figure>
-          {profile.photoNote && <PhotoNote text={profile.photoNote} />}
+            <LetterSpec letter={profile.name[0]} caption={`Fig. 1 — ${profile.markCaption}`} />
+          </motion.div>
+          {profile.markNote && <MarkNote text={profile.markNote} />}
         </div>
 
         <motion.div
