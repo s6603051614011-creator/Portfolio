@@ -16,7 +16,10 @@ export function RevealLines({ lines, as: Tag = 'h2', className = '', delay = 0, 
   return (
     <Tag ref={ref} className={className}>
       {lines.map((line, i) => (
+        // The leading space is invisible (the lines are blocks) but keeps the words apart
+        // for screen readers, search engines and copy-paste.
         <span className="rl-mask" key={i}>
+          {i > 0 && ' '}
           <motion.span
             className="rl-line"
             initial={{ y: '108%' }}

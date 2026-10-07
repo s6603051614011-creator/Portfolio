@@ -10,7 +10,6 @@ export const issue = {
 
 export const profile = {
   name: 'Ratklao Pholpikul',
-  monogram: 'K',
   location: 'Bangkok, Thailand',
   timezone: 'UTC+7',
   // Map pin on the contact page: the campus, a public place — never put your home address on a public site
@@ -19,14 +18,13 @@ export const profile = {
   coordinates: '13.8188° N, 100.5142° E',
   lat: 13.818811,
   lng: 100.514206,
-  photo: '/profile.jpg',
   photoSide: '/profile-cutout.webp', // About section (transparent background)
   tagline: 'Keeping networks, code and AI hard to break.',
   taglineEmphasis: 'hard to break', // gets a hand-drawn underline
   markCaption: 'R, set in Fraunces. Move across it to change the weight.', // under the cover initial, after "Fig. 1 —"
   markNote: 'R, for Ratklao', // little pen note with an arrow, next to the cover initial
   intro:
-    'Final-year Computer Engineering student at KMUTNB and incoming Security Engineer Intern at DCS. I work where networks, code and applied AI meet — and I care about keeping them secure.',
+    'Final-year Electronics Engineering (Computer) student at KMUTNB and incoming Security Engineer Intern at DCS. I work where networks, code and applied AI meet — and I care about keeping them secure.',
   email: 's6603051614011@email.kmutnb.ac.th',
   github: 'https://github.com/s6603051614011-creator',
   // Leave empty to hide. When you have it: '/cv.pdf' (file in public/)
@@ -92,7 +90,7 @@ export const experience = [
     period: 'Dec 2026 – Apr 2027',
     role: 'Security Engineer Intern',
     org: 'Datapro Computer Systems (DCS) · Professional Service Operations',
-    note: '[Key responsibilities — add once the internship starts]',
+    note: 'Starting December 2026.', // replace with key responsibilities once it starts
   },
   {
     host: 'gpo',
