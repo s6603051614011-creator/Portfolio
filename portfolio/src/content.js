@@ -29,8 +29,7 @@ export const profile = {
     'Final-year Computer Engineering student at KMUTNB and incoming Security Engineer Intern at DCS. I work where networks, code and applied AI meet — and I care about keeping them secure.',
   email: 's6603051614011@email.kmutnb.ac.th',
   github: 'https://github.com/s6603051614011-creator',
-  // Leave empty to hide. When you have them: 'https://www.linkedin.com/in/...' and '/cv.pdf' (file in public/)
-  linkedin: '',
+  // Leave empty to hide. When you have it: '/cv.pdf' (file in public/)
   cv: '',
 }
 

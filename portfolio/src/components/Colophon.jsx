@@ -40,7 +40,6 @@ export default function Colophon() {
             <ul>
               <li><a href={`mailto:${profile.email}`}>Email</a></li>
               <li><a href={profile.github} {...external}>GitHub ↗</a></li>
-              {profile.linkedin && <li><a href={profile.linkedin} {...external}>LinkedIn ↗</a></li>}
               {profile.cv && <li><a href={profile.cv} download>CV ↓</a></li>}
             </ul>
           </div>

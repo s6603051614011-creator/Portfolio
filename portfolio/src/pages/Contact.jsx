@@ -15,7 +15,6 @@ export default function Contact() {
 
   const rows = [
     { label: 'Email', href: `mailto:${profile.email}`, text: profile.email },
-    { label: 'LinkedIn', href: profile.linkedin, text: profile.linkedin.replace('https://www.', ''), external: true },
     { label: 'GitHub', href: profile.github, text: profile.github.replace('https://', ''), external: true },
   ].filter((r) => r.href)
 

@@ -141,7 +141,6 @@ export default function Masthead() {
             </nav>
             <div className="menu-foot mono">
               <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-              {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>}
               <a href={`mailto:${profile.email}`}>Email</a>
             </div>
           </motion.div>
