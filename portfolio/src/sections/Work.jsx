@@ -1,5 +1,5 @@
-// 02 — Work: the thesis runs as a full feature spread; everything else is listed
-// like a contents page. On mouse devices a small label (or the project image) trails the cursor.
+// 02 — Work: featured projects run as full spreads (alternating sides); everything else
+// is listed like a contents page. On mouse devices a small label (or the project image) trails the cursor.
 import { useRef, useState } from 'react'
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
 import { featured, profile, projects } from '../content.js'
@@ -9,7 +9,11 @@ import { FadeUp, RevealLines } from '../components/Reveal.jsx'
 import Todo from '../components/Todo.jsx'
 import Scramble from '../components/Scramble.jsx'
 import InvoiceScan from '../components/InvoiceScan.jsx'
+import NetScan from '../components/NetScan.jsx'
 import './Work.css'
+
+// Animated illustrations, shown until a project has a real screenshot
+const PLATES = { invoice: InvoiceScan, netscan: NetScan }
 
 const external = (href) => (href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})
 
@@ -38,13 +42,14 @@ function TiltPlate({ children }) {
   )
 }
 
-function Feature() {
+function Feature({ project: featured, flipped }) {
+  const Plate = PLATES[featured.plate]
   return (
-    <article className="feature">
+    <article className={`feature${flipped ? ' is-flipped' : ''}`}>
       <TiltPlate>
         {featured.image
           ? <img src={featured.image} alt={`${featured.title} screenshot`} loading="lazy" />
-          : <InvoiceScan />}
+          : Plate && <Plate />}
       </TiltPlate>
 
       <div className="feature-body">
@@ -104,7 +109,7 @@ function ProjectIndex() {
           return (
             <FadeUp as="li" key={p.title} delay={i * 0.08}>
               <Row className="index-row" onMouseEnter={() => setHover(i)} {...linkProps}>
-                <span className="index-no mono">{String(i + 2).padStart(2, '0')}</span>
+                <span className="index-no mono">{String(featured.length + i + 1).padStart(2, '0')}</span>
                 <span className="index-main">
                   <span className="index-title display"><Todo>{p.title}</Todo></span>
                   <span className="index-desc"><Todo>{p.description}</Todo></span>
@@ -137,7 +142,9 @@ export default function Work() {
         title={['Things I’ve', <em key="b">built<span className="accent">.</span></em>]}
         aside={<a href={profile.github} className="link-line" {...external(profile.github)}>All repositories ↗</a>}
       />
-      <Feature />
+      <div className="features">
+        {featured.map((p, i) => <Feature key={p.title} project={p} flipped={i % 2 === 1} />)}
+      </div>
       <ProjectIndex />
     </section>
   )

@@ -1,0 +1,57 @@
+/* ---------- Network monitor plate (components/NetScan) ----------
+   A dark terminal in both themes, like the traceroute. Sized in cqw off the plate. */
+.ns {
+  --t-bg: #0F2466; --t-bar: #0B1B4F; --t-ink: #F4F7FF; --t-dim: #9DAAD8; --t-hi: #FFD23F;
+  --t-ok: #7EE0B5; --t-bad: #FF8A7A; --t-line: rgba(244, 247, 255, .14);
+  height: 100%; display: flex; flex-direction: column;
+  background: var(--t-bg); color: var(--t-ink);
+  font: 400 max(9px, 1.75cqw)/1.6 var(--f-mono); /* readable floor on phones */
+}
+:root[data-theme="dark"] .ns { --t-bg: #060D29; --t-bar: #040920; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ns { --t-bg: #060D29; --t-bar: #040920; }
+}
+
+.ns-bar {
+  display: flex; align-items: center; gap: 2cqw; padding: 1.4cqw 2.4cqw;
+  background: var(--t-bar); border-bottom: 1px solid var(--t-line);
+  color: var(--t-dim); font-size: 1.5cqw; letter-spacing: .04em;
+}
+.ns-dots { display: flex; gap: .8cqw; }
+.ns-dots i { width: 1.2cqw; height: 1.2cqw; border-radius: 50%; background: var(--t-line); }
+.ns-live { margin-left: auto; display: inline-flex; align-items: center; gap: .8cqw; }
+.ns-live::before { content: ''; width: .9cqw; height: .9cqw; border-radius: 50%; background: var(--t-ok); }
+
+.ns-body { flex: 1; padding: 2.4cqw 3cqw; overflow: hidden; }
+.ns-line { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; animation: ns-in .18s ease-out; }
+@keyframes ns-in { from { opacity: 0; transform: translateY(.4em); } }
+.ns-prompt { color: var(--t-hi); }
+.ns-cmd { margin-bottom: .5em; }
+.ns-info { color: var(--t-dim); }
+.ns-host, .ns-hit { display: grid; grid-template-columns: 3.4ch 15ch minmax(0, 1fr) auto; column-gap: 1ch; }
+.ns-mark { color: var(--t-ok); }
+.ns-ports { color: var(--t-hi); overflow: hidden; text-overflow: ellipsis; }
+.ns-hit .ns-mark, .ns-hit .ns-ports { color: var(--t-bad); }
+.ns-flag {
+  padding: 0 .7ch; border-radius: 2px; background: var(--t-bad); color: #2A0A06;
+  font-weight: 500; font-size: .85em;
+}
+.ns-risk {
+  display: inline-block; margin: .6em 0 .2em; padding: .1em .8ch; border-radius: 2px;
+  background: var(--t-hi); color: #1B2A5C; font-weight: 500;
+}
+.ns-ai { color: var(--t-ink); padding-left: 2ch; }
+.ns-ai::before { content: '› '; color: var(--t-hi); margin-left: -2ch; }
+.ns-done { margin-top: .5em; color: var(--t-ok); }
+.ns-caret { display: inline-block; width: .6em; height: 1.1em; background: var(--t-ink); vertical-align: text-bottom; animation: ns-blink 1s steps(1) infinite; }
+@keyframes ns-blink { 50% { opacity: 0; } }
+
+/* Phones: the plate grows taller so the whole run fits at the minimum size */
+@media (max-width: 599px) {
+  .feature-plate:has(.ns) { aspect-ratio: 1 / 1.05; }
+  .ns-bar { font-size: max(8px, 1.5cqw); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ns-line, .ns-caret { animation: none !important; }
+}

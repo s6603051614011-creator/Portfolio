@@ -52,17 +52,38 @@ export const about = {
   ],
 }
 
-export const featured = {
-  kicker: 'Senior thesis · In progress',
-  title: 'Automated Thai Tax Invoice OCR',
-  description:
-    'An end-to-end pipeline that reads Thai tax invoices and extracts structured fields. Fine-tuned a Vision-Language Model (Typhoon OCR 1.5 2B) in Python with QLoRA — including data preprocessing, augmentation and accuracy evaluation — served through a FastAPI + React web app.',
-  tags: ['Python', 'QLoRA', 'Typhoon OCR 1.5 2B', 'FastAPI', 'React', 'SQLite'],
-  // Optional — add when you have them, e.g. { value: '4.2%', label: 'CER' } / { label: 'Source code', href: '...' }
-  metrics: [],
-  links: [],
-  image: null, // e.g. '/ocr-screenshot.png' (put the file in public/)
-}
+// Featured projects, each run as a full spread in Work. `plate` picks the animated
+// illustration shown until there's a real `image`.
+export const featured = [
+  {
+    plate: 'invoice',
+    kicker: 'Senior thesis · In progress',
+    title: 'Automated Thai Tax Invoice OCR',
+    description:
+      'An end-to-end pipeline that reads Thai tax invoices and extracts structured fields. Fine-tuned a Vision-Language Model (Typhoon OCR 1.5 2B) in Python with QLoRA — including data preprocessing, augmentation and accuracy evaluation — served through a FastAPI + React web app.',
+    tags: ['Python', 'QLoRA', 'Typhoon OCR 1.5 2B', 'FastAPI', 'React', 'SQLite'],
+    // Optional — add when you have them, e.g. { value: '4.2%', label: 'CER' } / { label: 'Source code', href: '...' }
+    metrics: [],
+    links: [],
+    image: null, // e.g. '/ocr-screenshot.png' (put the file in public/)
+  },
+  {
+    plate: 'netscan',
+    kicker: 'Security tool · Mar 2026',
+    title: 'AI-Powered Network Monitor',
+    description:
+      'A Python scanner that sweeps a network for live hosts, checks their common ports and grabs service banners, then hands the results to a local LLM (Ollama + llama3) for a plain-language risk assessment. Nothing leaves the machine. Results show in a Rich terminal dashboard and export as HTML and JSON reports. Tested on my own home network only.',
+    tags: ['Python', 'socket', 'ThreadPoolExecutor', 'Ollama', 'llama3', 'Rich'],
+    // From a real scan of my home Wi-Fi (reports/scan_20260328_190212.json)
+    metrics: [
+      { value: '8', label: 'Hosts found' },
+      { value: '9', label: 'Open ports' },
+      { value: '47s', label: 'Full /24 scan' },
+    ],
+    links: [], // e.g. { label: 'Source code', href: 'https://github.com/...' }
+    image: null,
+  },
+]
 
 export const projects = [
   {

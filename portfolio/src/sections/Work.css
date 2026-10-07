@@ -1,7 +1,7 @@
 /* ---------- 02 Work (sections/Work) ---------- */
 .feature { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); align-items: start; }
 .feature-plate-wrap { grid-column: 1 / 8; perspective: 1200px; }
-.feature-plate { aspect-ratio: 4 / 3; background: var(--paper-2); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; will-change: transform; }
+.feature-plate { container-type: inline-size; aspect-ratio: 4 / 3; background: var(--paper-2); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; will-change: transform; }
 .feature-plate img { width: 100%; height: 100%; object-fit: cover; }
 .feature-body { grid-column: 8 / 13; display: flex; flex-direction: column; gap: 20px; }
 .feature-title { font-size: clamp(34px, 3.6vw, 52px); line-height: 1; }
@@ -12,6 +12,10 @@
 .feature-metrics div + div { padding-left: 12px; border-left: 1px solid var(--rule); }
 .feature-metrics dd { margin: 0; font-family: var(--f-display); font-size: clamp(32px, 3.4vw, 50px); line-height: 1; letter-spacing: -.03em; }
 .feature-links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 8px; }
+.features { display: flex; flex-direction: column; gap: clamp(88px, 11vw, 160px); }
+/* Every other spread swaps sides: copy left, plate right */
+.feature.is-flipped .feature-plate-wrap { grid-column: 6 / 13; grid-row: 1; }
+.feature.is-flipped .feature-body { grid-column: 1 / 6; grid-row: 1; }
 
 /* Contents-page list */
 .index { position: relative; margin-top: clamp(80px, 10vw, 140px); }
@@ -55,7 +59,8 @@
 
 @media (max-width: 899px) {
   .feature { grid-template-columns: minmax(0, 1fr); row-gap: 32px; }
-  .feature-plate-wrap, .feature-body { grid-column: 1; }
+  .feature-plate-wrap, .feature-body,
+  .feature.is-flipped .feature-plate-wrap, .feature.is-flipped .feature-body { grid-column: 1; grid-row: auto; }
   .index-row { grid-template-columns: 40px minmax(0, 1fr); }
   .index-kicker { grid-column: 2; grid-row: 1; }
   .index-main { grid-column: 2; }
