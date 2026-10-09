@@ -32,6 +32,9 @@
   transition: background .25s, padding-left .35s var(--ease);
 }
 .route-hop:hover, .route-hop.is-lit { background: rgba(255, 210, 63, .1); padding-left: 10px; }
+/* A hop with no entry below yet (not started) can't be picked */
+.route-hop:disabled { cursor: default; background: none; padding-left: 0; }
+.route-hop:disabled .route-go { display: none; }
 .route-hop:focus-visible { outline: 2px solid var(--t-hi); outline-offset: 2px; }
 .route-no { color: var(--t-dim); text-align: right; }
 .route-host { color: var(--t-hi); font-weight: 500; }

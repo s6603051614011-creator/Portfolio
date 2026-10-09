@@ -4,6 +4,7 @@
 // and the run repeats after a pause. Reduced motion shows the finished run.
 import { useEffect, useRef, useState } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
+import usePauseOffscreen from '../lib/usePauseOffscreen.js'
 import './NetScan.css'
 
 const HOSTS = [
@@ -35,6 +36,7 @@ const REPLAY_MS = 7000
 export default function NetScan() {
   const ref = useRef(null)
   const inView = useInView(ref, { amount: 0.4 })
+  usePauseOffscreen(ref)
   const reduce = useReducedMotion()
   const [shown, setShown] = useState(reduce ? LINES.length : 0)
 

@@ -2,6 +2,8 @@
 // A scan line runs down the sheet; each field it passes gets a detection box and lights
 // up in the extracted JSON beside it (with the Buddhist-era date normalised, the way the
 // pipeline has to). Pure CSS animation, timed from each field's position on the sheet.
+import { useRef } from 'react'
+import usePauseOffscreen from '../lib/usePauseOffscreen.js'
 import './InvoiceScan.css'
 
 const SCAN_S = 4 // seconds for the line to cross the sheet; the loop is 6s
@@ -15,8 +17,11 @@ const FIELDS = [
 const delay = (f) => ({ '--at': `${f.at * 100}%`, '--d': `${(f.at * SCAN_S).toFixed(2)}s` })
 
 export default function InvoiceScan() {
+  const ref = useRef(null)
+  usePauseOffscreen(ref)
   return (
     <div
+      ref={ref}
       className="inv"
       role="img"
       aria-label="Illustration: a sample Thai tax invoice. The tax ID, date and total are detected and extracted as JSON."

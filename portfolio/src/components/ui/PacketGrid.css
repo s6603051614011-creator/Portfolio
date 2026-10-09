@@ -1,0 +1,4 @@
+/* ---------- Packets on the grid (components/ui/PacketGrid) ----------
+   Fixed behind everything: z-index -1 paints it above the body's grid background but
+   below the page content, so panels, the band and the footer keep it underneath them. */
+.packet-grid { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }

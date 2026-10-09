@@ -78,7 +78,7 @@ export default function Experience() {
           no="03" label="Experience" page="12"
           title={['Where I’ve', <em key="l">been learning<span className="accent">.</span></em>]}
         />
-        <Route lit={lit} onLight={setHovered} onPick={pick} />
+        <Route lit={lit} onLight={setHovered} onPick={pick} linked={[...experience, ...education].map((e) => e.host)} />
         <div className="xp-cols">
           <Timeline title="Work & internships" entries={experience} lit={lit} />
           <Timeline title="Education" entries={education} delay={0.15} lit={lit} />

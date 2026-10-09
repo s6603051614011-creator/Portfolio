@@ -1,13 +1,17 @@
 /* ---------- Cover letter specimen (components/LetterSpec) ---------- */
-/* --w is the glyph weight; registered so the idle "breathing" can animate it */
+/* --w is the glyph weight; registered so the one-off "breath" can animate it */
 @property --w { syntax: '<number>'; inherits: true; initial-value: 400; }
 
 .spec { margin: 0; }
 .spec-svg {
   display: block; width: 100%; height: auto; overflow: visible; cursor: crosshair; touch-action: pan-y;
+  /* dragging across it is part of the play — don't let that start a text selection */
+  user-select: none; -webkit-user-select: none;
   border: 1px solid var(--rule); border-radius: 2px;
   background: color-mix(in srgb, var(--print) 55%, transparent);
-  animation: spec-breathe 7s ease-in-out 3s infinite;
+  /* one breath once it's drawn, then it holds still: re-shaping a variable font every
+     frame is expensive, so this must not loop */
+  animation: spec-breathe 3.2s ease-in-out 3s 1;
 }
 .spec-svg.is-tracking { animation: none; }
 @keyframes spec-breathe {
@@ -17,7 +21,6 @@
 
 .spec-fill, .spec-outline {
   font-family: var(--f-display); font-variation-settings: 'wght' var(--w), 'opsz' 144;
-  transition: font-variation-settings .25s;
 }
 .spec-fill { fill: var(--ink); opacity: 0; animation: spec-fill .9s ease 1.9s forwards; }
 .spec-outline {

@@ -24,7 +24,7 @@ export const profile = {
   markCaption: 'R, set in Fraunces. Move across it to change the weight.', // under the cover initial, after "Fig. 1 —"
   markNote: 'R, for Ratklao', // little pen note with an arrow, next to the cover initial
   intro:
-    'Final-year Electronics Engineering (Computer) student at KMUTNB and incoming Security Engineer Intern at DCS. I work where networks, code and applied AI meet — and I care about keeping them secure.',
+    'Final-year Electronics Engineering (Computer) student at KMUTNB. I work where networks, code and applied AI meet — and I care about keeping them secure.',
   email: 's6603051614011@email.kmutnb.ac.th',
   github: 'https://github.com/s6603051614011-creator',
   // Leave empty to hide. When you have it: '/cv.pdf' (file in public/)
@@ -32,7 +32,7 @@ export const profile = {
 }
 
 export const terminal = [
-  { cmd: 'cat role.txt', out: 'Security Engineer Intern @ DCS' },
+  { cmd: 'cat role.txt', out: 'Final-year student @ KMUTNB' }, // shown as "Now:" on the cover and in the footer
   { cmd: 'cat focus.txt', out: 'network security · appsec · applied AI' },
 ]
 
@@ -46,7 +46,7 @@ export const about = {
   ],
   facts: [
     { label: 'Education', value: 'B.Eng. EnET-C, KMUTNB' },
-    { label: 'Next', value: 'Security Intern, DCS' },
+    { label: 'Thesis', value: 'Thai tax invoice OCR' },
     { label: 'Based in', value: 'Bangkok, Thailand' },
     { label: 'Languages', value: 'Thai, English (basic)' },
   ],
@@ -62,9 +62,10 @@ export const featured = [
     description:
       'An end-to-end pipeline that reads Thai tax invoices and extracts structured fields. Fine-tuned a Vision-Language Model (Typhoon OCR 1.5 2B) in Python with QLoRA — including data preprocessing, augmentation and accuracy evaluation — served through a FastAPI + React web app.',
     tags: ['Python', 'QLoRA', 'Typhoon OCR 1.5 2B', 'FastAPI', 'React', 'SQLite'],
-    // Optional — add when you have them, e.g. { value: '4.2%', label: 'CER' } / { label: 'Source code', href: '...' }
+    // Optional — add when you have them, e.g. { value: '4.2%', label: 'CER' }
     metrics: [],
-    links: [],
+    // NB: this repo must be public, or visitors get a GitHub 404
+    links: [{ label: 'Source code ↗', href: 'https://github.com/s6603051614011-creator/Thai-Tax-Invoice-OCR-System' }],
     image: null, // e.g. '/ocr-screenshot.png' (put the file in public/)
   },
   {
@@ -95,24 +96,17 @@ export const projects = [
     image: null, // optional: shows as a floating preview on hover
   },
   {
-    kicker: 'Full-stack · Apr 2026',
+    kicker: 'Full-stack · Team project · Apr 2026',
     title: 'Sports Facility Booking System',
     description:
       'A booking platform for small sports centres, built with Next.js and Firebase. Developed with Agile/Scrum, using the Singleton, State and Observer design patterns.',
-    link: null, // e.g. { label: 'Source code', href: 'https://github.com/...' }
+    link: { label: 'Source code', href: 'https://github.com/Aiyarat-am/Sports-Facility-Booking-System-for-Small-Centers' }, // team repo
     image: null,
   },
 ]
 
 // Work and internships, newest first
 export const experience = [
-  {
-    host: 'dcs', // matches a hop in `route` below
-    period: 'Dec 2026 – Apr 2027',
-    role: 'Security Engineer Intern',
-    org: 'Datapro Computer Systems (DCS) · Professional Service Operations',
-    note: 'Starting December 2026.', // replace with key responsibilities once it starts
-  },
   {
     host: 'gpo',
     period: 'Oct 2023 – Dec 2023',
@@ -151,7 +145,6 @@ export const route = [
   { host: 'rmutp', what: 'Vocational Certificate, Computer Technician', when: '2021–2023' },
   { host: 'gpo', what: 'IT Support Intern, Ratchathewi Branch', when: 'Oct–Dec 2023' },
   { host: 'kmutnb', what: 'B.Eng. Electronics Engineering (Computer)', when: '2023–now' },
-  { host: 'dcs', what: 'Security Engineer Intern', when: 'Dec 2026', pending: true },
 ]
 
 export const skills = [
@@ -160,4 +153,3 @@ export const skills = [
   { group: 'IT & Infrastructure', items: ['LAN cabling', 'Windows setup', 'Data backup', 'Hardware', 'Microsoft Office'] },
 ]
 
-export const learning = ['Subnetting & routing', 'NGFW / Deep Packet Inspection', 'TryHackMe Pre-Security']

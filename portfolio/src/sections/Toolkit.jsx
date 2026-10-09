@@ -1,10 +1,8 @@
-// 04 — Toolkit: set like the index at the back of a book, with a note in the margin
-// (circled in pen) for what's being learned right now.
+// 04 — Toolkit: set like the index at the back of a book.
 import { motion } from 'framer-motion'
-import { learning, skills } from '../content.js'
+import { skills } from '../content.js'
 import SectionHead from '../components/SectionHead.jsx'
-import { EASE, FadeUp } from '../components/Reveal.jsx'
-import Scribble from '../components/Scribble.jsx'
+import { EASE } from '../components/Reveal.jsx'
 import Scramble from '../components/Scramble.jsx'
 import './Toolkit.css'
 
@@ -35,13 +33,6 @@ export default function Toolkit() {
             </motion.ul>
           </div>
         ))}
-
-        <FadeUp as="aside" delay={0.3} className="kit-note" aria-label="Currently learning">
-          <p className="kit-note-label hand">
-            <span className="scribble-wrap">currently learning<Scribble shape="circle" delay={0.5} /></span>
-          </p>
-          <ul>{learning.map((l) => <li key={l}>{l}</li>)}</ul>
-        </FadeUp>
       </div>
     </section>
   )

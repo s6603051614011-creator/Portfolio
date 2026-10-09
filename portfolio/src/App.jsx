@@ -4,6 +4,7 @@ import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
 import Masthead from './components/Masthead.jsx'
 import Colophon from './components/Colophon.jsx'
 import PageTransition from './components/PageTransition.jsx'
+import PacketGrid from './components/ui/PacketGrid.jsx'
 import Home from './pages/Home.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
@@ -32,6 +33,7 @@ export default function App() {
           </motion.main>
         </AnimatePresence>
         <Colophon />
+        <PacketGrid />
       </div>
     </MotionConfig>
   )

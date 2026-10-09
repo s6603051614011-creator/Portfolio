@@ -6,13 +6,15 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { profile, route } from '../content.js'
 import { EASE } from '../components/Reveal.jsx'
+import usePauseOffscreen from '../lib/usePauseOffscreen.js'
 import './Route.css'
 
 const TYPE_MS = 45
 
-export default function Route({ lit, onLight, onPick }) {
+export default function Route({ lit, onLight, onPick, linked = [] }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.5 })
+  usePauseOffscreen(ref)
   const reduce = useReducedMotion()
   const target = profile.name.split(' ')[0].toLowerCase()
   const command = `traceroute ${target}`
@@ -63,6 +65,7 @@ export default function Route({ lit, onLight, onPick }) {
               <button
                 type="button"
                 className={`route-hop${h.pending ? ' is-pending' : ''}${lit === h.host ? ' is-lit' : ''}`}
+                disabled={!linked.includes(h.host)}
                 onMouseEnter={() => onLight(h.host)}
                 onMouseLeave={() => onLight(null)}
                 onFocus={() => onLight(h.host)}

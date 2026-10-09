@@ -19,12 +19,16 @@ const render = () =>
 // Preloader (markup + styles in index.html): stays up until the page and fonts have
 // loaded and its counter has reached 100 (MIN_MS), then the site renders and the sheet lifts off.
 // The app mounts as it lifts so the hero's intro animation plays in view.
-const MIN_MS = 1900
+// It only plays once per tab — theme-init.js hides it on later loads.
+const MIN_MS = 1000
 const loader = document.getElementById('preloader')
+const seen = document.documentElement.classList.contains('seen-loader')
 
-if (!loader) {
+if (!loader || seen) {
+  loader?.remove()
   render()
 } else {
+  try { sessionStorage.setItem('loader:seen', '1') } catch { /* private mode: just show it again */ }
   const loaded = new Promise((r) =>
     document.readyState === 'complete' ? r() : window.addEventListener('load', r, { once: true })
   )

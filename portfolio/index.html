@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Ratklao Pholpikul — Electronics Engineering (Computer) student at KMUTNB and incoming Security Engineer Intern. Projects, experience and contact." />
+    <meta name="description" content="Ratklao Pholpikul — Electronics Engineering (Computer) student at KMUTNB. Projects, experience and contact." />
     <meta name="theme-color" content="#F4F6FB" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0B1640" media="(prefers-color-scheme: dark)" />
     <script src="/theme-init.js"></script>
@@ -20,7 +20,7 @@
       @property --pl-n { syntax: '<integer>'; initial-value: 0; inherits: false; }
       #preloader {
         --pl-paper: #F4F6FB; --pl-ink: #0B1640; --pl-accent: #1B3A9C; --pl-muted: #55628F;
-        --pl-time: 1.7s; --pl-ease: cubic-bezier(.3, .6, .2, 1);
+        --pl-time: .9s; --pl-ease: cubic-bezier(.3, .6, .2, 1);
         position: fixed; inset: 0; z-index: 9999; overflow: hidden;
         background: var(--pl-paper); color: var(--pl-ink);
         transition: transform .95s cubic-bezier(.76, 0, .24, 1);
@@ -30,6 +30,7 @@
       }
       :root[data-theme="dark"] #preloader { --pl-paper: #0B1640; --pl-ink: #EDF1FF; --pl-accent: #FFD23F; --pl-muted: #9DAAD8; }
       #preloader.is-done { transform: translateY(-100%); }
+      .seen-loader #preloader { display: none; }
       #preloader .pl-inner {
         height: 100%; display: flex; flex-direction: column; justify-content: space-between;
         padding: clamp(20px, 4vh, 40px) clamp(16px, 4vw, 48px) clamp(24px, 6vh, 56px);

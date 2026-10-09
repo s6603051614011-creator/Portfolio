@@ -180,6 +180,9 @@ button { font: inherit; color: inherit; }
 }
 .curtain-label { font-family: var(--f-display); font-style: italic; font-size: clamp(28px, 4vw, 48px); }
 
+/* ---------- Paused while out of view (lib/usePauseOffscreen) ---------- */
+[data-offscreen], [data-offscreen] *, [data-offscreen] *::before, [data-offscreen] *::after { animation-play-state: paused !important; }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }

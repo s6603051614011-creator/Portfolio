@@ -2,7 +2,7 @@
 // Its outline draws itself, then fills; construction lines (cap height, baseline, width)
 // are measured from the real glyph. Move the pointer across it and the weight follows
 // (Fraunces is a variable font), with a CAD-style crosshair reading out coordinates.
-// Without a pointer the weight slowly breathes on its own.
+// It takes one slow breath on its own after drawing in, then holds still.
 import { useLayoutEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import './LetterSpec.css'
